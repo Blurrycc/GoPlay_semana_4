@@ -13,7 +13,7 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 shadow-sm">
                 <div class="container-fluid">
-                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
                         <img src="{% static 'tienda/img/logo_2.jpg' %}" alt="Logo Go Play!" height="60" class="me-2">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -22,7 +22,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase px-3 fw-bold" href="index.html">Volver a la Tienda</a>
+                                <a class="nav-link text-uppercase px-3 fw-bold" href="{% url 'index' %}">Volver a la Tienda</a>
                             </li>
                         </ul>
                     </div>
@@ -58,7 +58,7 @@
                                     <div class="invalid-feedback">La contraseña es obligatoria.</div>
                                     
                                     <div class="text-end mt-2">
-                                        <a href="recuperar.html" class="text-decoration-none" style="color: var(--gp-text-muted); font-size: 0.9em; transition: color 0.3s;">¿Olvidaste tu contraseña?</a>
+                                        <a href="{% url 'recuperar' %}" class="text-decoration-none" style="color: var(--gp-text-muted); font-size: 0.9em; transition: color 0.3s;">¿Olvidaste tu contraseña?</a>
                                     </div>
                                 </div>
 
@@ -70,7 +70,7 @@
                                 
                                 <div class="text-center mt-3 pt-3 border-top border-secondary">
                                     <span style="color: var(--gp-text-muted);">¿Aún no tienes equipo? </span>
-                                    <a href="registro.html" class="text-decoration-none fw-bold" style="color: var(--gp-red-accent); transition: color 0.3s;">Crear una cuenta</a>
+                                    <a href="{% url 'registro' %}" class="text-decoration-none fw-bold" style="color: var(--gp-red-accent); transition: color 0.3s;">Crear una cuenta</a>
                                 </div>
 
                             </form>

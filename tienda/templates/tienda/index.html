@@ -13,7 +13,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 shadow-sm">
                 <div class="container-fluid">
                     
-                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
                         <img src="{% static 'tienda/img/logo_2.jpg' %}" alt="Logo Go Play!" height="45" class="me-2">
                     </a>
 
@@ -145,7 +145,7 @@
                         <div class="card-body bg-dark">
                             <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Acción</h2>
                         </div>
-                    </a>
+                    </a>|
                 </div>
 
                 <div class="col">
@@ -204,22 +204,22 @@
                 
                 <div class="text-center mb-5">
                     <h6 class="text-uppercase mb-3">¿Ya tienes cuenta?</h6>
-                    <a href="login.html" class="btn btn-outline-light rounded-pill w-100 mb-3 px-4 fw-bold">
+                    <a href="{% url 'login' %}" class="btn btn-outline-light rounded-pill w-100 mb-3 px-4 fw-bold">
                         Iniciar Sesión
                     </a>
                     
                     <hr class="border-secondary my-4">
                     
                     <h6 class="text-uppercase mb-3">¿Eres nuevo gamer?</h6>
-                    <a href="registro.html" class="btn btn-danger rounded-pill w-100 px-4 text-uppercase fw-bold">
+                    <a href="{% url 'registro' %}" class="btn btn-danger rounded-pill w-100 px-4 text-uppercase fw-bold">
                         Crear una Cuenta
                     </a>
                 </div>
 
                 <div class="mt-auto">
                     <ul class="list-unstyled">
-                        <li class="mb-3"><a href="#" class="text-decoration-none  fs-6">Configuración de la cuenta</a></li>
-                        <li class="mb-3"><a href="#" class="text-decoration-none  fs-6">Mis pedidos</a></li>
+                        <li class="mb-3"><a href="{% url 'perfil' %}" class="text-decoration-none  fs-6">Configuración de la cuenta</a></li>
+                        <li class="mb-3"><a href="{% url 'carrito' %}" class="text-decoration-none  fs-6">Mis pedidos</a></li>
                         <li class="mb-3"><a href="#" class="text-decoration-none  fs-6">Lista de deseos</a></li>
                         <li class="mb-3"><a href="#" class="text-decoration-none  fs-6">Canjear código</a></li>
                     </ul>
