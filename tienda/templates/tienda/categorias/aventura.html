@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Go Play! - Aventura</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/estilos.css">
+    <link rel="stylesheet" href="{% static 'tienda/css/estilos.css' %}">
 </head>
 <body>
     <header>
-        <a href="/index.html" class="boton-volver">⬅ Volver al Inicio</a>
+        <a href="{% url 'index' %}" class="boton-volver">⬅ Volver al Inicio</a>
         <h1>AVENTURA</h1>
     </header>
 
     <main class="contenedor-fichas">
         
         <article class="ficha-juego">
-            <img src="/imagenes/awayout.jpg" alt="A Way Out">
+            <img src="{% static 'tienda/img/awayout.jpg' %}" alt="A Way Out">
             <div class="info-juego">
                 <h3>A Way Out</h3>
                 <p>A Way Out es una aventura exclusivamente cooperativa en la que te metes en la piel de uno de los dos reclusos protagonistas en su intrépida fuga de la cárcel.</p>
@@ -25,7 +26,7 @@
         </article>
 
         <article class="ficha-juego">
-            <img src="/imagenes/hogwartslegacy.jpg" alt="Hogwarts Legacy">
+            <img src="{% static 'tienda/img/hogwartslegacy.jpg' %}" alt="Hogwarts Legacy">
             <div class="info-juego">
                 <h3>Hogwarts Legacy</h3>
                 <p>Hogwarts Legacy es un RPG inmersivo de acción en mundo abierto. Ahora puedes tomar el control de la acción y ser el centro de tu propia aventura en el mundo mágico.</p>

@@ -47,8 +47,8 @@
                                                     Juegos por Género
                                                 </h6>
                                                 <ul class="list-unstyled mega-menu-list">
-                                                    <li class="mb-2"><a href="categorias/accion/accion.html" class="dropdown-item p-0 rounded-0">Acción</a></li>
-                                                    <li class="mb-2"><a href="categorias/aventura/aventura.html" class="dropdown-item p-0 rounded-0">Aventura</a></li>
+                                                    <li class="mb-2"><a href="{% url 'categorias_accion' %}" class="dropdown-item p-0 rounded-0">Acción</a></li>
+                                                    <li class="mb-2"><a href="{% url 'categorias_aventura' %}" class="dropdown-item p-0 rounded-0">Aventura</a></li>
                                                     <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Indie</a></li>
                                                     <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Multijugador</a></li>
                                                 </ul>
@@ -150,16 +150,16 @@
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 contenedor-categorias">
 
                 <div class="col">
-                    <a href="categorias/accion/accion.html" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                    <a href="{% url 'categorias_accion' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
                         <img src="{% static 'tienda/img/img_accion.jpg' %}" class="card-img-top img-fluid" alt="Categoría Acción">
                         <div class="card-body bg-dark">
                             <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Acción</h2>
                         </div>
-                    </a>|
+                    </a>
                 </div>
 
                 <div class="col">
-                    <a href="categorias/aventura/aventura.html" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                    <a href="{% url 'categorias_aventura' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
                         <img src="{% static 'tienda/img/img_aventura.jpeg' %}" class="card-img-top img-fluid" alt="Categoría Aventura">
                         <div class="card-body bg-dark">
                             <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Aventura</h2>
@@ -168,7 +168,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="categorias/estrategia/estrategia.html" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                    <a href="{% url 'categorias_estrategia' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
                         <img src="{% static 'tienda/img/img_estrategia.webp' %}" class="card-img-top img-fluid" alt="Categoría Estrategia">
                         <div class="card-body bg-dark">
                             <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Estrategia</h2>
@@ -177,7 +177,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="categorias/disparos/disparos.html" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                    <a href="{% url 'categorias_disparos' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
                         <img src="{% static 'tienda/img/img_disparos.jpg' %}" class="card-img-top img-fluid" alt="Categoría Disparos">
                         <div class="card-body bg-dark">
                             <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Disparos</h2>
@@ -186,7 +186,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="categorias/supervivencia/supervivencia.html" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                    <a href="{% url 'categorias_supervivencia' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
                         <img src="{% static 'tienda/img/img_supervivencia.jpg' %}" class="card-img-top img-fluid" alt="Categoría Supervivencia">
                         <div class="card-body bg-dark">
                             <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Supervivencia</h2>

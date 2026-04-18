@@ -34,3 +34,20 @@ def carrito(request):
 
 def mantenedor_productos(request):
     return render(request, 'tienda/mantenedor_productos.html')
+
+# --- Vistas de Categorías ---
+def accion(request):
+    return render(request, 'tienda/categorias/accion.html')
+
+def aventura(request):
+    return render(request, 'tienda/categorias/aventura.html')
+
+def estrategia(request):
+    return render(request, 'tienda/categorias/estrategia.html')
+
+def supervivencia(request):
+    return render(request, 'tienda/categorias/supervivencia.html')
+
+def disparos(request):
+    return render(request, 'tienda/categorias/disparos.html')
+
