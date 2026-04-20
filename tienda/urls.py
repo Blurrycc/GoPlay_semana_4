@@ -14,5 +14,6 @@ urlpatterns = [
     path('categorias/estrategia/', views.estrategia, name='categorias_estrategia'), # Ruta para categoría Estrategia
     path('categorias/supervivencia/', views.supervivencia, name='categorias_supervivencia'), # Ruta para categoría Supervivencia
     path('categorias/disparos/', views.disparos, name='categorias_disparos'), # Ruta para categoría Disparos
+    path('logout/', views.cerrar_sesion, name='logout'), # Ruta para cerrar sesión
 ]
 

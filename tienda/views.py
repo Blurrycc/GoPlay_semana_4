@@ -3,38 +3,39 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import PerfilUsuario
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Vista de la página principal
 def index(request):
-    # 1. Creamos una variable y una lista de datos en Python
+    # Creamos una variable y una lista de datos en Python
     nombre_gamer = "GamerX_99"
     lista_juegos = ["Super Mario Bros. Wonder", "Zelda: Tears of the Kingdom", "Monster Hunter Wilds"]
     
-    # 2. Empaquetamos esos datos en un 'contexto' (diccionario)
+    # Empaquetamos esos datos en un 'contexto' (diccionario)
     contexto = {
         "usuario": nombre_gamer,
         "juegos": lista_juegos
     }
     
-    # 3. Enviamos el contexto al HTML
+    # Enviamos el contexto al HTML
     return render(request, 'tienda/index.html', contexto)
 
 # Vistas de Usuario
 def login_usuario(request): # Le cambiamos el nombre ligeramente para que no choque con la función 'login' de Django
     if request.method == 'POST':
-        # 1. Atrapamos los datos del formulario usando los "name" de nuestros inputs en HTML
+        # Atrapamos los datos del formulario usando los "name" de nuestros inputs en HTML
         usuario_login = request.POST.get('alias_usuario')
         contrasena_login = request.POST.get('password_usuario')
 
-        # 2. Django verifica si existe y si la clave es correcta
+        # Django verifica si existe y si la clave es correcta
         user = authenticate(request, username=usuario_login, password=contrasena_login)
 
         if user is not None:
-            # 3. Si todo está bien, le creamos la sesión (lo dejamos "logueado")
+            # Si todo está bien, le creamos la sesión (lo dejamos "logueado")
             login(request, user)
             return redirect('index') # Lo mandamos a la página principal
         else:
-            # 4. Si se equivoca, mostramos un error
+            # Si se equivoca, mostramos un error
             messages.error(request, 'Usuario o contraseña incorrectos.')
 
     # Si solo está entrando a mirar la página, cargamos el HTML normal
@@ -42,21 +43,21 @@ def login_usuario(request): # Le cambiamos el nombre ligeramente para que no cho
 
 def registro(request):
     if request.method == 'POST':
-        # 1. Atrapamos los datos usando los "name" de tus inputs en HTML
+        # Atrapamos los datos usando los "name" de tus inputs en HTML
         alias = request.POST.get('alias_usuario')
         correo = request.POST.get('email_usuario')
         clave = request.POST.get('password_usuario')
         direccion = request.POST.get('direccion_envio')
         
-        # 2. Guardamos el usuario base en la tabla de Django
+        # Guardamos el usuario base en la tabla de Django
         try:
             # create_user encripta la contraseña automáticamente
             nuevo_usuario = User.objects.create_user(username=alias, email=correo, password=clave)
             
-            # 3. Guardamos los datos extra en tu tabla PerfilUsuario
+            # Guardamos los datos extra en tu tabla PerfilUsuario
             PerfilUsuario.objects.create(user=nuevo_usuario, direccion=direccion)
             
-            # 4. Mensaje de éxito y redirección
+            # Mensaje de éxito y redirección
             messages.success(request, '¡Cuenta creada exitosamente! Por favor, inicia sesión.')
             return redirect('login')
             
@@ -70,10 +71,14 @@ def registro(request):
 def recuperar(request):
     return render(request, 'tienda/recuperar.html')
 
+
+# --- Vistas Protegidas ---
+@login_required(login_url='login')
 def perfil(request):
     return render(request, 'tienda/perfil.html')
 
 # Vistas de Tienda
+@login_required(login_url='login')
 def carrito(request):
     return render(request, 'tienda/carrito.html')
 
@@ -96,3 +101,9 @@ def supervivencia(request):
 def disparos(request):
     return render(request, 'tienda/categorias/disparos.html')
 
+
+# --- Función para Cerrar Sesión ---
+def cerrar_sesion(request):
+    logout(request)
+    messages.success(request, 'Has cerrado sesión exitosamente.')
+    return redirect('index')

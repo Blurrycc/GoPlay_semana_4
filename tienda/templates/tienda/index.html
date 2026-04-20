@@ -127,9 +127,22 @@
                                 Buscar
                             </a>
 
-                            <button class="btn btn-danger rounded-pill px-4 text-uppercase fw-bold" type="submit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLogin">
-                                <i class="bi bi-person-fill me-1"></i> Iniciar Sesión / Registro
-                            </button>
+                            {% if user.is_authenticated %}
+                                <span class="text-light me-3 align-self-center">Hola, <b>{{ user.username }}</b></span>
+
+                                {% if user.is_staff %}
+                                <a href="/admin/" class="btn btn-warning rounded-pill px-4 text-uppercase fw-bold me-2">Panel Admin</a>
+                                {% endif %}
+
+                                <a href="{% url 'perfil' %}" class="btn btn-outline-light rounded-pill px-4 text-uppercase fw-bold me-2">Mi Perfil</a>
+                                <a href="{% url 'logout' %}" class="btn btn-danger rounded-pill px-4 text-uppercase fw-bold">Cerrar Sesión</a>
+
+                            {% else %}
+                                <button class="btn btn-danger rounded-pill px-4 text-uppercase fw-bold" type="submit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLogin">
+                                    <i class="bi bi-person-fill me-1"></i> Iniciar Sesión / Registro
+                                </button>
+                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>
