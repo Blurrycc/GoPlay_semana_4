@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 setTimeout(() => {
                     this.submit(); // Enviamos el formulario después de mostrar el mensaje
-                }, 1500); // Esperamos 1.5 segundos para que el usuario vea el mensaje
+                }, 1100); // Esperamos 1.1 segundos para que el usuario vea el mensaje
             }
         });
     }
@@ -140,6 +140,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 cajaError.className = 'alert alert-success mt-3';
                 cajaError.innerHTML = '¡Sesión iniciada correctamente!';
                 cajaError.classList.remove('d-none');
+
+                setTimeout(() => {
+                    this.submit(); // Enviamos el formulario después de mostrar el mensaje
+                }, 1100); // Esperamos 1.1 segundos para que el usuario vea el mensaje
             }
         });
     }

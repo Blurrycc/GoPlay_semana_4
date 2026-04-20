@@ -44,17 +44,18 @@
                                     Iniciar Sesión
                                 </h2>
                             </div>
-                            <form id="formularioLogin" class="needs-validation" novalidate>
+                            <form id="formularioLogin" class="needs-validation" method="POST" novalidate>
+                                {% csrf_token %}    
                             
                                 <div class="mb-3">
                                     <label for="loginUsuario" class="form-label text-light">Correo electrónico o Usuario:</label>
-                                    <input type="text" class="form-control text-bg-dark border-secondary" id="loginUsuario" name="usuario_login" placeholder="Tu alias gamer">
+                                    <input type="text" class="form-control text-bg-dark border-secondary" id="loginUsuario" name="alias_usuario" placeholder="Tu alias gamer">
                                     <div class="invalid-feedback">Debes ingresar tu usuario o correo.</div>
                                 </div>
-
+                                
                                 <div class="mb-4">
                                     <label for="loginClave" class="form-label text-light">Contraseña:</label>
-                                    <input type="password" class="form-control text-bg-dark border-secondary" id="loginClave" name="password_login" placeholder="Ingresa tu contraseña">
+                                    <input type="password" class="form-control text-bg-dark border-secondary" id="loginClave" name="password_usuario" placeholder="Ingresa tu contraseña">
                                     <div class="invalid-feedback">La contraseña es obligatoria.</div>
                                     
                                     <div class="text-end mt-2">

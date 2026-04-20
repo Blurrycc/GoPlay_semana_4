@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import PerfilUsuario
+from django.contrib.auth import authenticate, login, logout
 
 # Vista de la página principal
 def index(request):
@@ -19,7 +20,24 @@ def index(request):
     return render(request, 'tienda/index.html', contexto)
 
 # Vistas de Usuario
-def login(request):
+def login_usuario(request): # Le cambiamos el nombre ligeramente para que no choque con la función 'login' de Django
+    if request.method == 'POST':
+        # 1. Atrapamos los datos del formulario usando los "name" de nuestros inputs en HTML
+        usuario_login = request.POST.get('alias_usuario')
+        contrasena_login = request.POST.get('password_usuario')
+
+        # 2. Django verifica si existe y si la clave es correcta
+        user = authenticate(request, username=usuario_login, password=contrasena_login)
+
+        if user is not None:
+            # 3. Si todo está bien, le creamos la sesión (lo dejamos "logueado")
+            login(request, user)
+            return redirect('index') # Lo mandamos a la página principal
+        else:
+            # 4. Si se equivoca, mostramos un error
+            messages.error(request, 'Usuario o contraseña incorrectos.')
+
+    # Si solo está entrando a mirar la página, cargamos el HTML normal
     return render(request, 'tienda/login.html')
 
 def registro(request):
