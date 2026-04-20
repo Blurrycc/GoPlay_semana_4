@@ -1,8 +1,8 @@
 // Esperamos a que la página cargue completamente antes de ejecutar JS
 document.addEventListener('DOMContentLoaded', function() {
-    // ==========================================
-    // 1. VALIDACIONES: REGISTRO DE USUARIO (Feedback Inline)
-    // ==========================================
+    // =====================================
+    // 1. VALIDACIONES: REGISTRO DE USUARIO 
+    // =====================================
     const formRegistro = document.getElementById('formularioRegistro');
     
     if (formRegistro) {
@@ -98,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Si TODO está correcto (formularioValido sigue siendo true)
             if (formularioValido) {
                 mensajeExito.classList.remove('d-none');
+
+                setTimeout(() => {
+                    this.submit(); // Enviamos el formulario después de mostrar el mensaje
+                }, 1500); // Esperamos 1.5 segundos para que el usuario vea el mensaje
             }
         });
     }
