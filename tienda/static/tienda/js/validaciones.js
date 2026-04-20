@@ -1,8 +1,10 @@
 // Esperamos a que la página cargue completamente antes de ejecutar JS
 document.addEventListener('DOMContentLoaded', function() {
+
     // =====================================
-    // 1. VALIDACIONES: REGISTRO DE USUARIO 
+    // VALIDACIONES: REGISTRO DE USUARIO 
     // =====================================
+    
     const formRegistro = document.getElementById('formularioRegistro');
     
     if (formRegistro) {
@@ -107,8 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =======================
-    // 2. VALIDACIONES: LOGIN 
+    //  VALIDACIONES: LOGIN 
     // =======================
+
     const formLogin = document.getElementById('formularioLogin');
     if (formLogin) {
         formLogin.addEventListener('submit', function(e) {
@@ -149,8 +152,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
-    // 3. VALIDACIONES: RECUPERAR CLAVE
+    //  VALIDACIONES: RECUPERAR CLAVE
     // ==========================================
+
     const formRecuperar = document.getElementById('formularioRecuperar');
     if (formRecuperar) {
         formRecuperar.addEventListener('submit', function(e) {
@@ -170,8 +174,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================
-    // 4. VALIDACIONES: MANTENEDOR 
+    // VALIDACIONES: MANTENEDOR 
     // ============================
+
     const formMantenedor = document.getElementById('formularioMantenedor');
     if (formMantenedor) {
         formMantenedor.addEventListener('submit', function(e) {
@@ -233,8 +238,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
-    // 5. SIMULACIÓN DE PAGO: CARRITO
+    // SIMULACIÓN DE PAGO: CARRITO
     // ==========================================
+
     const btnPago = document.getElementById('btnSimularPago');
     if (btnPago) {
         btnPago.addEventListener('click', function() {
@@ -248,6 +254,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 btnPago.innerHTML = 'Pago Realizado';
                 btnPago.classList.replace('btn-danger', 'btn-success');
             }, 1500);
+        });
+    }
+
+    // ==========================================
+    //  VALIDACIONES: PERFIL DE USUARIO
+    // ==========================================
+
+    const formPerfil = document.getElementById('formularioPerfil');
+    if (formPerfil) {
+        formPerfil.addEventListener('submit', function(e) {
+            e.preventDefault(); // Detenemos el envío rápido para poder validar
+
+            const inputClaveNueva = document.getElementById('perfilClaveNueva');
+            const inputClaveRepetir = document.getElementById('perfilClaveRepetir');
+            const mensajePerfil = document.getElementById('mensajePerfil'); 
+            
+            let formularioValido = true;
+            mensajePerfil.classList.add('d-none');
+
+            // Solo validamos si el usuario intentó escribir una contraseña nueva
+            if (inputClaveNueva.value.trim() !== '') {
+                if (inputClaveNueva.value !== inputClaveRepetir.value) {
+                    marcarInvalido(inputClaveRepetir);
+                    mostrarError(mensajePerfil, 'Las contraseñas nuevas no coinciden.');
+                    formularioValido = false;
+                } else {
+                    marcarValido(inputClaveNueva);
+                    marcarValido(inputClaveRepetir);
+                }
+            }
+
+            // Si todo está correcto (las claves coinciden o se dejaron en blanco)
+            if (formularioValido) {
+                mensajePerfil.className = 'alert alert-success mt-3 py-2';
+                mensajePerfil.innerHTML = 'Procesando cambios...';
+                mensajePerfil.classList.remove('d-none');
+
+                setTimeout(() => {
+                    this.submit(); 
+                }, 1000); 
+            }
         });
     }
 

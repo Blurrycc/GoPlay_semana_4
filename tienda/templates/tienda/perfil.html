@@ -58,22 +58,31 @@
                         
                         <h3 class="text-light mb-4 border-bottom border-secondary pb-2">Modificar Datos Personales</h3>
                         
-                        <form id="formularioPerfil">
-                            
+                        <form id="formularioPerfil" method="POST" action="">
+                            {% csrf_token %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
                             <div class="row mb-3">
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label for="perfilNombre" class="form-label text-light">Nombre completo:</label>
-                                    <input type="text" class="form-control text-bg-dark border-secondary" id="perfilNombre" value="Juan Pérez">
+                                    <input type="text" class="form-control text-bg-dark border-secondary" id="perfilNombre" name="nombre_completo" value="{{ user.first_name }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="perfilUsuario" class="form-label text-light">Nombre de usuario:</label>
-                                    <input type="text" class="form-control text-bg-dark border-secondary" id="perfilUsuario" value="GamerX_99">
+                                    <input type="text" class="form-control text-bg-dark border-secondary" id="perfilUsuario" name="alias_usuario" value="{{ user.username }}" readonly>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="perfilCorreo" class="form-label text-light">Correo electrónico:</label>
-                                <input type="email" class="form-control text-bg-dark border-secondary" id="perfilCorreo" value="juan.gamer@correo.com">
+                                <input type="email" class="form-control text-bg-dark border-secondary" id="perfilCorreo" name="email_usuario" value="{{ user.email }}">
                             </div>
 
                             <h4 class="text-light mt-4 mb-3 fs-5 border-bottom border-secondary pb-2">Cambiar Contraseña</h4>
@@ -81,11 +90,11 @@
                             <div class="row mb-4">
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label for="perfilClaveNueva" class="form-label text-light">Nueva contraseña:</label>
-                                    <input type="password" class="form-control text-bg-dark border-secondary" id="perfilClaveNueva" placeholder="Deja en blanco para no cambiar">
+                                    <input type="password" class="form-control text-bg-dark border-secondary" id="perfilClaveNueva" name="password_nueva" placeholder="Deja en blanco para no cambiar">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="perfilClaveRepetir" class="form-label text-light">Repetir nueva contraseña:</label>
-                                    <input type="password" class="form-control text-bg-dark border-secondary" id="perfilClaveRepetir" placeholder="Confirma tu nueva clave">
+                                    <input type="password" class="form-control text-bg-dark border-secondary" id="perfilClaveRepetir" name="password_repetir" placeholder="Confirma tu nueva clave">
                                 </div>
                             </div>
 
@@ -97,7 +106,8 @@
                             </div>
 
                         </form>
-                        </div>
+
+                    </div>
                 </div>
             </div>
 

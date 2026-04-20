@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import PerfilUsuario
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 
 # Vista de la página principal
 def index(request):
@@ -75,6 +76,26 @@ def recuperar(request):
 # --- Vistas Protegidas ---
 @login_required(login_url='login')
 def perfil(request):
+    if request.method == 'POST':
+        nuevo_nombre = request.POST.get('nombre_completo')
+        nuevo_correo = request.POST.get('email_usuario')
+        nueva_clave = request.POST.get('password_nueva') # Atrapamos la nueva clave del HTML
+        
+        usuario = request.user
+        usuario.first_name = nuevo_nombre
+        usuario.email = nuevo_correo
+        
+        # Lógica para cambiar contraseña solo si el usuario escribió algo
+        if nueva_clave and nueva_clave.strip() != '':
+            usuario.set_password(nueva_clave) # Encripta la nueva clave para Oracle
+            usuario.save()
+            update_session_auth_hash(request, usuario) # Mantiene al usuario logueado con su nueva clave
+        else:
+            usuario.save() # Guarda solo nombre y correo
+            
+        messages.success(request, '¡Tus datos han sido actualizados con éxito!')
+        return redirect('perfil')
+
     return render(request, 'tienda/perfil.html')
 
 # Vistas de Tienda
