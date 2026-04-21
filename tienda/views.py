@@ -1,25 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import PerfilUsuario, Producto, Categoria
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.core.paginator import Paginator
 
 # Vista de la página principal
 def index(request):
-    # Creamos una variable y una lista de datos en Python
-    nombre_gamer = "GamerX_99"
-    lista_juegos = ["Super Mario Bros. Wonder", "Zelda: Tears of the Kingdom", "Monster Hunter Wilds"]
-    
-    # Empaquetamos esos datos en un 'contexto' (diccionario)
-    contexto = {
-        "usuario": nombre_gamer,
-        "juegos": lista_juegos
-    }
-    
-    # Enviamos el contexto al HTML
-    return render(request, 'tienda/index.html', contexto)
+    return render(request, 'tienda/index.html')
 
 # Vistas de Usuario
 def login_usuario(request): # Le cambiamos el nombre ligeramente para que no choque con la función 'login' de Django
@@ -149,19 +139,80 @@ def mantenedor_productos(request):
 
 # --- Vistas de Categorías ---
 def accion(request):
-    return render(request, 'tienda/categorias/accion.html')
+    # 1. Filtramos solo los juegos que pertenecen a la categoría "Acción"
+    # (Asegúrate de que el nombre coincida exactamente con como lo escribiste en Oracle)
+    lista_productos = Producto.objects.filter(categoria__nombre='Acción').order_by('id')
+    
+    # 2. Configuramos el Paginador (mostrar solo 4 juegos por página para probar)
+    paginator = Paginator(lista_productos, 4) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    # 3. Enviamos los productos paginados a tu HTML
+    contexto = {
+        'productos': page_obj 
+    }
+    return render(request, 'tienda/categorias/accion.html', contexto) # Ajusta el nombre de tu html
 
 def aventura(request):
-    return render(request, 'tienda/categorias/aventura.html')
+    # 1. Filtramos solo los juegos que pertenecen a la categoría "Aventura"
+    lista_productos = Producto.objects.filter(categoria__nombre='Aventura').order_by('id')
+    
+    # 2. Configuramos el Paginador
+    paginator = Paginator(lista_productos, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # 3. Enviamos los productos paginados a tu HTML
+    contexto = {
+        'productos': page_obj
+    }
+    return render(request, 'tienda/categorias/aventura.html', contexto)
 
 def estrategia(request):
-    return render(request, 'tienda/categorias/estrategia.html')
+    # 1. Filtramos solo los juegos que pertenecen a la categoría "Estrategia"
+    lista_productos = Producto.objects.filter(categoria__nombre='Estrategia').order_by('id')
+    
+    # 2. Configuramos el Paginador
+    paginator = Paginator(lista_productos, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # 3. Enviamos los productos paginados a tu HTML
+    contexto = {
+        'productos': page_obj
+    }
+    return render(request, 'tienda/categorias/estrategia.html', contexto)
 
 def supervivencia(request):
-    return render(request, 'tienda/categorias/supervivencia.html')
+    # 1. Filtramos solo los juegos que pertenecen a la categoría "Supervivencia"
+    lista_productos = Producto.objects.filter(categoria__nombre='Supervivencia').order_by('id')
+    
+    # 2. Configuramos el Paginador
+    paginator = Paginator(lista_productos, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # 3. Enviamos los productos paginados a tu HTML
+    contexto = {
+        'productos': page_obj
+    }
+    return render(request, 'tienda/categorias/supervivencia.html', contexto)
 
 def disparos(request):
-    return render(request, 'tienda/categorias/disparos.html')
+    # 1. Filtramos solo los juegos que pertenecen a la categoría "Disparos"
+    lista_productos = Producto.objects.filter(categoria__nombre='Disparos').order_by('id')
+    
+    # 2. Configuramos el Paginador
+    paginator = Paginator(lista_productos, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # 3. Enviamos los productos paginados a tu HTML
+    contexto = {
+        'productos': page_obj
+    }
+    return render(request, 'tienda/categorias/disparos.html', contexto)
 
 
 # --- Función para Cerrar Sesión ---
@@ -169,3 +220,43 @@ def cerrar_sesion(request):
     logout(request)
     messages.success(request, 'Has cerrado sesión exitosamente.')
     return redirect('index')
+
+# --- FUNCIÓN PARA ELIMINAR ---
+@login_required(login_url='login')
+def eliminar_producto(request, id):
+    if not request.user.is_staff:
+        return redirect('index')
+        
+    producto = get_object_or_404(Producto, id=id)
+    producto.delete()
+    messages.success(request, '¡Producto eliminado correctamente!')
+    return redirect('mantenedor')
+
+# --- FUNCIÓN PARA EDITAR ---
+@login_required(login_url='login')
+def editar_producto(request, id):
+    if not request.user.is_staff:
+        return redirect('index')
+        
+    producto = get_object_or_404(Producto, id=id)
+    categorias = Categoria.objects.all()
+
+    if request.method == 'POST':
+        producto.nombre = request.POST.get('nombre_prod')
+        producto.precio = request.POST.get('precio_prod')
+        producto.stock = request.POST.get('stock_prod')
+        
+        # Actualizamos la categoría
+        cat_id = request.POST.get('categoria_prod')
+        producto.categoria = Categoria.objects.get(id=cat_id)
+        
+        # Solo actualizamos la imagen si el administrador subió una nueva
+        if request.FILES.get('imagen_prod'):
+            producto.imagen = request.FILES.get('imagen_prod')
+            
+        producto.save()
+        messages.success(request, '¡Producto actualizado con éxito!')
+        return redirect('mantenedor')
+
+    contexto = {'producto': producto, 'categorias': categorias}
+    return render(request, 'tienda/editar_producto.html', contexto)

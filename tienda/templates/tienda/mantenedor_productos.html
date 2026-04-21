@@ -113,7 +113,7 @@
                                             <th scope="col" class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
                                         {% for p in productos %}
                                         <tr>
@@ -129,8 +129,8 @@
                                                 {% endif %}
                                             </td>
                                             <td class="text-center">
-                                                <a href="#" class="btn btn-sm btn-outline-info me-1">Editar</a>
-                                                <a href="#" class="btn btn-sm btn-outline-danger">Borrar</a>
+                                                <a href="{% url 'editar_producto' p.id %}" class="btn btn-sm btn-outline-info me-1">Editar</a>
+                                                <a href="{% url 'eliminar_producto' p.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar {{ p.nombre }}?');">Borrar</a>
                                             </td>
                                         </tr>
                                         {% endfor %}  

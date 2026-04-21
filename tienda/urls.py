@@ -18,6 +18,8 @@ urlpatterns = [
     path('logout/', views.cerrar_sesion, name='logout'), # Ruta para cerrar sesión
 
     path('mantenedor/', views.mantenedor_productos, name='mantenedor'), # Ruta para el mantenedor de productos (solo admin)
+    path('eliminar_producto/<int:id>/', views.eliminar_producto, name='eliminar_producto'), # Ruta para eliminar un producto (solo admin)
+    path('editar_producto/<int:id>/', views.editar_producto, name='editar_producto'), # Ruta para editar un producto (solo admin)
 
     # --- RUTAS PARA RECUPERAR CONTRASEÑA ---
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="tienda/recuperar.html"), name="reset_password"),
