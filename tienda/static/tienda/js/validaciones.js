@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // =====================================
     // VALIDACIONES: REGISTRO DE USUARIO 
     // =====================================
-    
+
     const formRegistro = document.getElementById('formularioRegistro');
     
     if (formRegistro) {
@@ -151,14 +151,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==========================================
+   // ==========================================
     //  VALIDACIONES: RECUPERAR CLAVE
     // ==========================================
-
     const formRecuperar = document.getElementById('formularioRecuperar');
     if (formRecuperar) {
         formRecuperar.addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Detenemos para validar
             const cajaError = document.getElementById('mensajeRecuperar');
             const correo = document.getElementById('recuperarCorreo').value.trim();
 
@@ -168,8 +167,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             cajaError.className = 'alert alert-success mt-3';
-            cajaError.innerHTML = 'Te hemos enviado un enlace de recuperación. Revisa tu bandeja de entrada.';
+            cajaError.innerHTML = 'Enviando solicitud...';
             cajaError.classList.remove('d-none');
+
+            // Enviamos los datos a Django
+            setTimeout(() => {
+                this.submit(); 
+            }, 1000);
         });
     }
 

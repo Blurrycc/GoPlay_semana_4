@@ -45,11 +45,12 @@
                             <p class="text-muted mt-2">Ingresa tu correo electrónico y te enviaremos las instrucciones para restablecer tu contraseña.</p>
                         </div>
                         
-                        <form id="formularioRecuperar">
+                        <form id="formularioRecuperar" method="POST" action="{% url 'reset_password' %}">
+                            {% csrf_token %}
                             
                             <div class="mb-4">
                                 <label for="recuperarCorreo" class="form-label text-light">Correo electrónico:</label>
-                                <input type="email" class="form-control text-bg-dark border-secondary" id="recuperarCorreo" placeholder="ejemplo@correo.com">
+                                <input type="email" class="form-control text-bg-dark border-secondary" id="recuperarCorreo" name="email" placeholder="Ingresa tu correo">
                             </div>
 
                             <div id="mensajeRecuperar" class="alert alert-danger d-none" role="alert"></div>

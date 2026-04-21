@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views # Importamos las vistas creadas en tienda/views.py
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index, name='index'), # La ruta vacía es el inicio
@@ -15,5 +16,11 @@ urlpatterns = [
     path('categorias/supervivencia/', views.supervivencia, name='categorias_supervivencia'), # Ruta para categoría Supervivencia
     path('categorias/disparos/', views.disparos, name='categorias_disparos'), # Ruta para categoría Disparos
     path('logout/', views.cerrar_sesion, name='logout'), # Ruta para cerrar sesión
+
+    # --- RUTAS PARA RECUPERAR CONTRASEÑA ---
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="tienda/recuperar.html"), name="reset_password"),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="tienda/recuperar_enviado.html"), name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="tienda/recuperar_confirmar.html"), name="password_reset_confirm"),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="tienda/recuperar_completo.html"), name="password_reset_complete"),
 ]
 

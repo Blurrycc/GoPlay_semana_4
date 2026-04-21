@@ -1,0 +1,6 @@
+<h1>Paso 2: Escribe tu nueva clave</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Cambiar Contraseña</button>
+</form>

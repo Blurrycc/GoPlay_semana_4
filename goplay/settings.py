@@ -111,3 +111,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Configuración para archivos subidos por el usuario (Imágenes de los juegos)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Simulador de envío de correos para entorno de desarrollo
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+

@@ -17,3 +17,28 @@ class PerfilUsuario(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+
+
+# 3. Tabla para las Categorías de los juegos (Ej: Acción, Aventura, RPG)
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=50, unique=True, verbose_name='Nombre de la Categoría')
+
+    def __str__(self):
+        return self.nombre
+
+# 4. Tabla para los Productos (Videojuegos)
+class Producto(models.Model):
+    nombre = models.CharField(max_length=150, verbose_name='Título del Juego')
+    descripcion = models.TextField(verbose_name='Descripción')
+    precio = models.IntegerField(verbose_name='Precio')
+    stock = models.IntegerField(verbose_name='Stock Disponible')
+    # Relacionamos cada juego con una categoría
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name='Categoría')
+    # Guardaremos las imágenes en una carpeta llamada 'productos'
+    imagen = models.ImageField(upload_to='productos/', null=True, blank=True, verbose_name='Imagen del Juego')
+
+    def __str__(self):
+        return self.nombre
+    
+
