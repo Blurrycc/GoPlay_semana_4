@@ -230,13 +230,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 cajaError.className = 'alert alert-success mt-3 py-2';
                 cajaError.innerHTML = '¡Producto agregado al inventario con éxito!';
                 cajaError.classList.remove('d-none');
-                formMantenedor.reset(); // Limpia el formulario tras guardar
                 
                 // Quitamos las clases verdes para que vuelva a su estado original
                 inputNombre.classList.remove('is-valid');
                 inputCategoria.classList.remove('is-valid');
                 inputPrecio.classList.remove('is-valid');
                 inputStock.classList.remove('is-valid');
+
+                
+                setTimeout(() => {
+                    this.submit(); 
+                }, 1000);
             }
         });
     }

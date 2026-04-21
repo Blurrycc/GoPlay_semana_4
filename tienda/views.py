@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import PerfilUsuario
+from .models import PerfilUsuario, Producto, Categoria
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
@@ -103,8 +103,49 @@ def perfil(request):
 def carrito(request):
     return render(request, 'tienda/carrito.html')
 
+@login_required(login_url='login')
 def mantenedor_productos(request):
-    return render(request, 'tienda/mantenedor_productos.html')
+    # 1. Seguridad: Si el usuario NO es administrador (staff), lo echamos
+    if not request.user.is_staff:
+        messages.error(request, 'Acceso denegado. Esta sección es solo para Administradores.')
+        return redirect('index')
+
+    # 2. Traemos los datos de Oracle
+    categorias = Categoria.objects.all()
+    productos = Producto.objects.all()
+
+    # 3. Lógica para CREAR un producto nuevo desde el Frontend
+    if request.method == 'POST':
+        v_nombre = request.POST.get('nombre_prod')
+        v_desc = request.POST.get('desc_prod', 'Sin descripción') # Por si no tienes campo de descripción
+        v_precio = request.POST.get('precio_prod')
+        v_stock = request.POST.get('stock_prod')
+        v_cat_id = request.POST.get('categoria_prod')
+        
+        # Las imágenes no viajan en POST, viajan en FILES
+        v_imagen = request.FILES.get('imagen_prod') 
+
+        try:
+            categoria_obj = Categoria.objects.get(id=v_cat_id)
+            Producto.objects.create(
+                nombre=v_nombre,
+                descripcion=v_desc,
+                precio=v_precio,
+                stock=v_stock,
+                categoria=categoria_obj,
+                imagen=v_imagen
+            )
+            messages.success(request, '¡Producto agregado al catálogo exitosamente!')
+            return redirect('mantenedor')
+        except Exception as e:
+            messages.error(request, f'Error al guardar: {str(e)}')
+
+    # 4. Enviamos los datos al HTML
+    contexto = {
+        'categorias': categorias,
+        'productos': productos
+    }
+    return render(request, 'tienda/mantenedor_productos.html', contexto)
 
 # --- Vistas de Categorías ---
 def accion(request):

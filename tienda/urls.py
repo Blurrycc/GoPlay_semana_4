@@ -17,6 +17,8 @@ urlpatterns = [
     path('categorias/disparos/', views.disparos, name='categorias_disparos'), # Ruta para categoría Disparos
     path('logout/', views.cerrar_sesion, name='logout'), # Ruta para cerrar sesión
 
+    path('mantenedor/', views.mantenedor_productos, name='mantenedor'), # Ruta para el mantenedor de productos (solo admin)
+
     # --- RUTAS PARA RECUPERAR CONTRASEÑA ---
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="tienda/recuperar.html"), name="reset_password"),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="tienda/recuperar_enviado.html"), name="password_reset_done"),
