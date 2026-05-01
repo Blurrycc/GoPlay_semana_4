@@ -1,248 +1,57 @@
+{% extends 'tienda/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'tienda/css/estilos.css' %}">
-        <title>Go Play!</title>
-    </head>
-    <body>
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 shadow-sm">
-                <div class="container-fluid">
-                    
-                    <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
-                        <img src="{% static 'tienda/img/logo_2.jpg' %}" alt="Logo Go Play!" height="45" class="me-2">
-                    </a>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+{% block titulo %}Inicio - Go Play!{% endblock %}
 
-                    <div class="collapse navbar-collapse" id="navbarNav"> 
-                        <ul class="navbar-nav mx-auto">
+{% block contenido %}
+<main class="contenedor-categorias my-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 contenedor-categorias">
 
-                            <li class="nav-item dropdown dropdown-mega-gp">
-                                <a class="nav-link dropdown-toggle text-uppercase px-3 fw-bold active" href="#" role="button" data-bs-toggle="dropdown">
-                                    Explorar
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-dark dropdown-menu-mega w-100 p-0 shadow" data-bs-popper="static">
-                                    <div class="container py-5">
-                                        <div class="row g-4 justify-content-center"> 
-                                            <div class="col-md-3">
-                                                <h6 class="mega-menu-title text-danger text-uppercase mb-3 fw-bold fs-7">
-                                                    Novedades
-                                                </h6>
-                                                <ul class="list-unstyled mega-menu-list">
-                                                    <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Últimos Lanzamientos</a></li>
-                                                    <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Próximos Juegos</a></li>
-                                                    <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Ofertas Especiales</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <h6 class="mega-menu-title text-danger text-uppercase mb-3 fw-bold fs-7">
-                                                    Juegos por Género
-                                                </h6>
-                                                <ul class="list-unstyled mega-menu-list">
-                                                    <li class="mb-2"><a href="{% url 'categorias_accion' %}" class="dropdown-item p-0 rounded-0">Acción</a></li>
-                                                    <li class="mb-2"><a href="{% url 'categorias_aventura' %}" class="dropdown-item p-0 rounded-0">Aventura</a></li>
-                                                    <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Indie</a></li>
-                                                    <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Multijugador</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <h6 class="mega-menu-title text-danger text-uppercase mb-3 fw-bold fs-7">
-                                                    Más Categorías
-                                                </h6>
-                                                <ul class="list-unstyled mega-menu-list">
-                                                    <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Juegos Gratuitos</a></li>
-                                                    <li class="mb-2"><a href="#" class="dropdown-item p-0 rounded-0">Contenido descargable</a></li>
-                                                </ul>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="nav-item dropdown dropdown-mega-gp">
-                                <a class="nav-link dropdown-toggle text-uppercase px-3 fw-bold active" href="#" role="button" data-bs-toggle="dropdown">
-                                    Comprar
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-dark dropdown-menu-mega w-100 p-0 shadow" data-bs-popper="static">
-                                    <div class="container py-5">
-                                        <div class="row g-4 justify-content-center">
-
-                                            <div class="col-md-3">
-                                                <h6 class="mega-menu-title text-danger text-uppercase mb-3 fw-bold fs-7">
-                                                    Tarjetas de regalo
-                                                </h6>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <h6 class="mega-menu-title text-danger text-uppercase mb-3 fw-bold fs-7">
-                                                    DLCs y Expansiones
-                                                </h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="nav-item dropdown dropdown-mega-gp">
-                                <a class="nav-link dropdown-toggle text-uppercase px-3 fw-bold active" href="#" role="button" data-bs-toggle="dropdown">
-                                    Asistencia
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-dark dropdown-menu-mega w-100 p-0 shadow" data-bs-popper="static">
-                                    <div class="container py-5">
-                                        <div class="row g-4 justify-content-center">
-
-                                            <div class="col-md-3">
-                                                <h6 class="mega-menu-title text-danger text-uppercase mb-3 fw-bold fs-7">
-                                                    Centro de ayuda
-                                                </h6>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <h6 class="mega-menu-title text-danger text-uppercase mb-3 fw-bold fs-7">
-                                                    Estado del servicio
-                                                </h6>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ul>
-
-                        <div class="d-flex align-items-center gap-3">
-                            
-                            <a href="#" class="nav-link text-uppercase">
-                                Buscar
-                            </a>
-
-                            {% if user.is_authenticated %}
-                                <span class="text-light me-3 align-self-center">Hola, <b>{{ user.username }}</b></span>
-
-                                {% if user.is_staff %}
-                                <a href="{% url 'mantenedor' %}" class="btn btn-warning rounded-pill px-4 text-uppercase fw-bold me-2">Mantenedor</a>
-                                <a href="/admin/" class="btn btn-warning rounded-pill px-4 text-uppercase fw-bold me-2">Panel Admin</a>
-                                {% endif %}
-
-                                <a href="{% url 'perfil' %}" class="btn btn-outline-light rounded-pill px-4 text-uppercase fw-bold me-2">Mi Perfil</a>
-                                <a href="{% url 'logout' %}" class="btn btn-danger rounded-pill px-4 text-uppercase fw-bold">Cerrar Sesión</a>
-
-                            {% else %}
-                                <button class="btn btn-danger rounded-pill px-4 text-uppercase fw-bold" type="submit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLogin">
-                                    <i class="bi bi-person-fill me-1"></i> Iniciar Sesión / Registro
-                                </button>
-                            {% endif %}
-                            
-                        </div>
-                    </div>
+        <div class="col">
+            <a href="{% url 'categorias_accion' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                <img src="{% static 'tienda/img/img_accion.jpg' %}" class="card-img-top img-fluid" alt="Categoría Acción">
+                <div class="card-body bg-dark">
+                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Acción</h2>
                 </div>
-            </nav>
-        </header>
-
-
-        <main class="contenedor-categorias">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 contenedor-categorias">
-
-                <div class="col">
-                    <a href="{% url 'categorias_accion' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                        <img src="{% static 'tienda/img/img_accion.jpg' %}" class="card-img-top img-fluid" alt="Categoría Acción">
-                        <div class="card-body bg-dark">
-                            <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Acción</h2>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col">
-                    <a href="{% url 'categorias_aventura' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                        <img src="{% static 'tienda/img/img_aventura.jpeg' %}" class="card-img-top img-fluid" alt="Categoría Aventura">
-                        <div class="card-body bg-dark">
-                            <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Aventura</h2>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col">
-                    <a href="{% url 'categorias_estrategia' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                        <img src="{% static 'tienda/img/img_estrategia.webp' %}" class="card-img-top img-fluid" alt="Categoría Estrategia">
-                        <div class="card-body bg-dark">
-                            <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Estrategia</h2>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col">
-                    <a href="{% url 'categorias_disparos' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                        <img src="{% static 'tienda/img/img_disparos.jpg' %}" class="card-img-top img-fluid" alt="Categoría Disparos">
-                        <div class="card-body bg-dark">
-                            <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Disparos</h2>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col">
-                    <a href="{% url 'categorias_supervivencia' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                        <img src="{% static 'tienda/img/img_supervivencia.jpg' %}" class="card-img-top img-fluid" alt="Categoría Supervivencia">
-                        <div class="card-body bg-dark">
-                            <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Supervivencia</h2>
-                        </div>
-                    </a>
-                </div>
-                
-            </div>
-        </main>
-
-        <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasLogin">
-    
-            <div class="offcanvas-header border-bottom border-secondary">
-                <h5 class="offcanvas-title text-uppercase fw-bold" id="offcanvasLoginLabel">
-                    Mi Cuenta Go Play!
-                </h5>
-                <button type="submit" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-            </div>
-
-            <div class="offcanvas-body d-flex flex-column p-4">
-
-                <div class="text-center mb-4">
-                    <img src="{% static 'tienda/img/logo_goplay.webp' %}" alt="Logo Go Play!" class="img-fluid rounded shadow" style="max-width: 280px;">
-                </div>
-                
-                <div class="text-center mb-5">
-                    <h6 class="text-uppercase mb-3">¿Ya tienes cuenta?</h6>
-                    <a href="{% url 'login' %}" class="btn btn-outline-light rounded-pill w-100 mb-3 px-4 fw-bold">
-                        Iniciar Sesión
-                    </a>
-                    
-                    <hr class="border-secondary my-4">
-                    
-                    <h6 class="text-uppercase mb-3">¿Eres nuevo gamer?</h6>
-                    <a href="{% url 'registro' %}" class="btn btn-danger rounded-pill w-100 px-4 text-uppercase fw-bold">
-                        Crear una Cuenta
-                    </a>
-                </div>
-
-                <div class="mt-auto">
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><a href="{% url 'perfil' %}" class="text-decoration-none  fs-6">Configuración de la cuenta</a></li>
-                        <li class="mb-3"><a href="{% url 'carrito' %}" class="text-decoration-none  fs-6">Mis pedidos</a></li>
-                        <li class="mb-3"><a href="#" class="text-decoration-none  fs-6">Lista de deseos</a></li>
-                        <li class="mb-3"><a href="#" class="text-decoration-none  fs-6">Canjear código</a></li>
-                    </ul>
-                </div>
-
-            </div>
+            </a>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>        
-    </body>
-</html>
+        <div class="col">
+            <a href="{% url 'categorias_aventura' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                <img src="{% static 'tienda/img/img_aventura.jpeg' %}" class="card-img-top img-fluid" alt="Categoría Aventura">
+                <div class="card-body bg-dark">
+                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Aventura</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="{% url 'categorias_estrategia' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                <img src="{% static 'tienda/img/img_estrategia.webp' %}" class="card-img-top img-fluid" alt="Categoría Estrategia">
+                <div class="card-body bg-dark">
+                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Estrategia</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="{% url 'categorias_disparos' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                <img src="{% static 'tienda/img/img_disparos.jpg' %}" class="card-img-top img-fluid" alt="Categoría Disparos">
+                <div class="card-body bg-dark">
+                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Disparos</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="{% url 'categorias_supervivencia' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
+                <img src="{% static 'tienda/img/img_supervivencia.jpg' %}" class="card-img-top img-fluid" alt="Categoría Supervivencia">
+                <div class="card-body bg-dark">
+                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Supervivencia</h2>
+                </div>
+            </a>
+        </div>
+        
+    </div>
+</main>
+{% endblock %}
