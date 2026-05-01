@@ -14,6 +14,7 @@ class PerfilUsuario(models.Model):
     rol = models.ForeignKey(Rol, on_delete=models.SET_NULL, null=True)
     telefono = models.CharField(max_length=15, blank=True, null=True, verbose_name='Teléfono')
     direccion = models.CharField(max_length=200, blank=True, null=True, verbose_name='Dirección de Despacho')
+    fecha_nacimiento = models.DateField(blank=True, null=True, verbose_name='Fecha de Nacimiento')
 
     def __str__(self):
         return self.user.username

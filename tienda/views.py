@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.core.paginator import Paginator
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 # Vista de la página principal
 def index(request):
@@ -32,31 +34,75 @@ def login_usuario(request): # Le cambiamos el nombre ligeramente para que no cho
     # Si solo está entrando a mirar la página, cargamos el HTML normal
     return render(request, 'tienda/login.html')
 
+from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+from django.contrib import messages
+from .models import PerfilUsuario # Asegúrate de importar el nuevo modelo
+
 def registro(request):
     if request.method == 'POST':
-        # Atrapamos los datos usando los "name" de tus inputs en HTML
-        alias = request.POST.get('alias_usuario')
-        correo = request.POST.get('email_usuario')
-        clave = request.POST.get('password_usuario')
-        direccion = request.POST.get('direccion_envio')
+        # 1. Capturamos todos los datos del HTML
+        v_nombre = request.POST.get('nombre_completo')
+        v_username = request.POST.get('username')
+        v_email = request.POST.get('email')
+        v_password = request.POST.get('password')
+        v_password_conf = request.POST.get('password_conf') # Capturamos la 2da clave
         
-        # Guardamos el usuario base en la tabla de Django
+        v_direccion = request.POST.get('direccion') # Capturamos dirección
+        v_fecha_nac = request.POST.get('fecha_nacimiento') # Capturamos fecha
+        
+        # 2. Verificar que las contraseñas coincidan
+        if v_password != v_password_conf:
+            messages.error(request, 'Las contraseñas no coinciden. Por favor, inténtalo de nuevo.')
+            return redirect('registro')
+
+        # 3. Comprobamos si el usuario o email ya existen
+        if User.objects.filter(username=v_username).exists():
+            messages.error(request, f'El nombre de usuario "{v_username}" ya está en uso.')
+            return redirect('registro')
+
+        if User.objects.filter(email=v_email).exists():
+            messages.error(request, 'Este correo electrónico ya se encuentra registrado.')
+            return redirect('registro')
+
+        # 4. Validación de políticas de contraseña segura
         try:
-            # create_user encripta la contraseña automáticamente
-            nuevo_usuario = User.objects.create_user(username=alias, email=correo, password=clave)
-            
-            # Guardamos los datos extra en tu tabla PerfilUsuario
-            PerfilUsuario.objects.create(user=nuevo_usuario, direccion=direccion)
-            
-            # Mensaje de éxito y redirección
-            messages.success(request, '¡Cuenta creada exitosamente! Por favor, inicia sesión.')
+            validate_password(v_password)
+        except ValidationError as e:
+            for error in e.messages:
+                messages.error(request, f'Contraseña insegura: {error}')
+            return redirect('registro')
+
+        # 5. Creación del Usuario y su Perfil
+        try:
+            # Creamos el usuario base de Django
+            nuevo_usuario = User.objects.create_user(
+                username=v_username, 
+                email=v_email, 
+                password=v_password
+            )
+            nuevo_usuario.first_name = v_nombre
+            nuevo_usuario.save()
+
+            # Creamos el perfil extendido con la dirección y fecha
+            # Validamos si vino vacía la fecha para no romper la base de datos
+            if v_fecha_nac == "":
+                v_fecha_nac = None
+
+            PerfilUsuario.objects.create(
+                user=nuevo_usuario,
+                direccion=v_direccion,
+                fecha_nacimiento=v_fecha_nac
+            )
+
+            messages.success(request, '¡Tu cuenta Go Play! ha sido creada exitosamente. Ya puedes iniciar sesión.')
             return redirect('login')
             
         except Exception as e:
-            # Si el usuario ya existe o hay un error, mostramos un mensaje
-            messages.error(request, 'Error al crear la cuenta. Intenta con otro nombre de usuario.')
-            
-    # Si el usuario solo entra a la página (método GET), mostramos tu HTML normal
+            messages.error(request, f'Ocurrió un error al crear la cuenta: {str(e)}')
+            return redirect('registro')
+
     return render(request, 'tienda/registro.html')
 
 def recuperar(request):

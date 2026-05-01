@@ -42,6 +42,14 @@
                         <h2 class="text-center text-uppercase fw-bold mb-4" style="color: var(--gp-red-accent);">
                             Únete a Go Play!
                         </h2>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %} text-center fw-bold mb-4" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                         
                             <form id="formularioRegistro" class="needs-validation" method="POST" action="" novalidate>
                                 {% csrf_token %}
@@ -54,31 +62,31 @@
 
                                 <div class="mb-3">
                                     <label for="usuario" class="form-label text-light">Nombre de usuario:</label>
-                                    <input type="text" class="form-control text-bg-dark border-secondary" id="usuario" name="alias_usuario" minlength="4" maxlength="20" placeholder="Tu alias gamer">
+                                    <input type="text" class="form-control text-bg-dark border-secondary" id="usuario" name="username" minlength="4" maxlength="20" placeholder="Tu alias gamer">
                                     <div class="invalid-feedback">Tu usuario debe tener al menos 4 caracteres.</div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="correo" class="form-label text-light">Correo electrónico:</label>
-                                    <input type="email" class="form-control text-bg-dark border-secondary" id="correo" name="email_usuario" placeholder="ejemplo@correo.com">
+                                    <input type="email" class="form-control text-bg-dark border-secondary" id="correo" name="email" placeholder="ejemplo@correo.com">
                                     <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="direccion" class="form-label text-light">Dirección de despacho:</label>
-                                    <input type="text" class="form-control text-bg-dark border-secondary" id="direccion" name="direccion_envio" placeholder="Ej: Av. Siempreviva 742">
+                                    <input type="text" class="form-control text-bg-dark border-secondary" id="direccion" name="direccion" placeholder="Ej: Av. Siempreviva 742">
                                     <div class="invalid-feedback">Necesitamos tu dirección para enviar tus juegos físicos.</div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <div class="col-md-6 mb-3 mb-md-0">
                                         <label for="clave" class="form-label text-light">Contraseña:</label>
-                                        <input type="password" class="form-control text-bg-dark border-secondary" id="clave" name="password_usuario" minlength="6" maxlength="18" placeholder="Crea una contraseña">
+                                        <input type="password" class="form-control text-bg-dark border-secondary" id="clave" name="password" minlength="6" maxlength="18" placeholder="Crea una contraseña">
                                         <div class="invalid-feedback">Debe tener entre 6 y 18 caracteres, 1 mayúscula, 1 número y 1 símbolo (@#$).</div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="repetirClave" class="form-label text-light">Repetir contraseña:</label>
-                                        <input type="password" class="form-control text-bg-dark border-secondary" id="repetirClave" name="password_confirmacion" maxlength="18" placeholder="Confirma tu clave">
+                                        <input type="password" class="form-control text-bg-dark border-secondary" id="repetirClave" name="password_conf" maxlength="18" placeholder="Confirma tu clave">
                                         <div class="invalid-feedback">Las contraseñas no coinciden.</div>
                                     </div>
                                 </div>
