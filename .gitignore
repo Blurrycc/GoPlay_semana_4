@@ -1,0 +1,13 @@
+# Mis variables de entorno secretas
+.env
+
+# Entorno virtual de Python
+venv/
+env/
+
+# Archivos temporales y caché de Python
+__pycache__/
+*.pyc
+
+# Base de datos local (por si en algún momento usas SQLite de prueba)
+db.sqlite3

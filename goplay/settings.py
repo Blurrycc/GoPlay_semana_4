@@ -1,7 +1,12 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 import sys
 import oracledb
 sys.modules["cx_Oracle"] = oracledb
+
+# Cargar las variables de entorno del archivo .env
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -67,11 +72,11 @@ WSGI_APPLICATION = 'goplay.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'XE',                     # Nombre de la base de datos por defecto en este contenedor
-        'USER': 'system',                 # Usuario administrador por defecto
-        'PASSWORD': 'Duoc2026',           # La contraseña que pusimos en el comando de Docker
-        'HOST': 'localhost',              # Como está en tu propia máquina, usamos localhost
-        'PORT': '1521',                   # El puerto que abrimos
+        'NAME': os.getenv('DB_NAME'),                  # Nombre de la base de datos por defecto en este contenedor
+        'USER': os.getenv('DB_USER'),                 # Usuario administrador por defecto
+        'PASSWORD': os.getenv('DB_PASSWORD'),        # La contraseña que pusimos en el comando de Docker
+        'HOST': os.getenv('DB_HOST'),               # Como está en tu propia máquina, usamos localhost
+        'PORT': os.getenv('DB_PORT'),              # El puerto que abrimos
     }
 }
 
@@ -119,5 +124,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Simulador de envío de correos para entorno de desarrollo
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Configuración para permitir Login con Email o Username
+AUTHENTICATION_BACKENDS = [
+    'tienda.backends.EmailOUsernameBackend', # Nuestro nuevo método
+    'django.contrib.auth.backends.ModelBackend', # El método original por si acaso
+]
 
 
