@@ -1,57 +1,107 @@
 {% extends 'tienda/base.html' %}
 {% load static %}
 
-{% block titulo %}Inicio - Go Play!{% endblock %}
+{% block titulo %}Go Play! - Tienda Geek y Videojuegos{% endblock %}
 
 {% block contenido %}
-<main class="contenedor-categorias my-4">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 contenedor-categorias">
+<!-- CONTENEDOR PRINCIPAL: Envuelve toda la página dando márgenes a los lados -->
+<div class="container my-5">
 
-        <div class="col">
-            <a href="{% url 'categorias_accion' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                <img src="{% static 'tienda/img/img_accion.jpg' %}" class="card-img-top img-fluid" alt="Categoría Acción">
-                <div class="card-body bg-dark">
-                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Acción</h2>
-                </div>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="{% url 'categorias_aventura' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                <img src="{% static 'tienda/img/img_aventura.jpeg' %}" class="card-img-top img-fluid" alt="Categoría Aventura">
-                <div class="card-body bg-dark">
-                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Aventura</h2>
-                </div>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="{% url 'categorias_estrategia' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                <img src="{% static 'tienda/img/img_estrategia.webp' %}" class="card-img-top img-fluid" alt="Categoría Estrategia">
-                <div class="card-body bg-dark">
-                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Estrategia</h2>
-                </div>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="{% url 'categorias_disparos' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                <img src="{% static 'tienda/img/img_disparos.jpg' %}" class="card-img-top img-fluid" alt="Categoría Disparos">
-                <div class="card-body bg-dark">
-                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Disparos</h2>
-                </div>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="{% url 'categorias_supervivencia' %}" class="card h-100 shadow-sm category-card text-decoration-none border-0 overflow-hidden">
-                <img src="{% static 'tienda/img/img_supervivencia.jpg' %}" class="card-img-top img-fluid" alt="Categoría Supervivencia">
-                <div class="card-body bg-dark">
-                    <h2 class="card-title text-center text-uppercase fs-5 mb-0 text-light">Supervivencia</h2>
-                </div>
-            </a>
-        </div>
+    <!-- ========================================== -->
+    <!-- FILA 1: ZONA VERDE (Banners Interactivos)  -->
+    <!-- ========================================== -->
+<div class="row mb-5 g-4"> 
         
+        <!-- Banner 1: Hades -->
+        <div class="col-12 col-md-4">
+            <div class="banner-interactivo border border-secondary border-2">
+                <img src="{% static 'tienda/img/hades_portada.webp' %}" alt="Hades" class="banner-img">
+                <video src="{% static 'tienda/video/hades_gameplay.mp4' %}" class="banner-video" muted loop playsinline></video>
+                <h5 class="banner-titulo fw-bold">Hades</h5>
+            </div>
+        </div>
+
+        <!-- Banner 2: Dark Souls -->
+        <div class="col-12 col-md-4">
+            <div class="banner-interactivo border border-secondary border-2">
+                <img src="{% static 'tienda/img/borderlands4_portada.webp' %}" alt="Borderlands 4" class="banner-img">
+                <video src="{% static 'tienda/video/borderlands4_gameplay.mp4' %}" class="banner-video" muted loop playsinline></video>
+                <h5 class="banner-titulo fw-bold">Borderlands 4</h5>
+            </div>
+        </div>
+
+        <!-- Banner 3: Megabonk -->
+        <div class="col-12 col-md-4">
+            <div class="banner-interactivo border border-secondary border-2">
+                <img src="{% static 'tienda/img/megabonk_portada.webp' %}" alt="Megabonk" class="banner-img">
+                <video src="{% static 'tienda/video/megabonk_gameplay.mp4' %}" class="banner-video" muted loop playsinline></video>
+                <h5 class="banner-titulo fw-bold">Megabonk</h5>
+            </div>
+        </div>
+
     </div>
-</main>
+
+
+    <!-- ========================================== -->
+    <!-- FILA 2: CONTENIDO PRINCIPAL DIVIDIDO       -->
+    <!-- ========================================== -->
+    <div class="row">
+        
+        <!-- COLUMNA IZQUIERDA: ZONA AMARILLA (Categorías) -->
+        <!-- Ocupa 3 de las 12 columnas en PC, pero en celulares (col-12) se pone arriba -->
+        <div class="col-12 col-lg-3 mb-4">
+            <div class="p-4 h-100 text-bg-dark rounded border border-warning border-3">
+                <h4 class="text-warning fw-bold text-uppercase mb-4">Categorías</h4>
+                <p>Aquí irán las tarjetas verticales de Acción, Aventura, etc.</p>
+            </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: Área gigante para Ofertas y Catálogo -->
+        <!-- Ocupa las 9 columnas restantes -->
+        <div class="col-12 col-lg-9">
+            
+            <!-- ZONA AZUL (Carrusel de Ofertas tipo Steam) -->
+            <div class="p-5 mb-4 text-bg-dark rounded border border-info border-3">
+                <h4 class="text-info fw-bold mb-3">Zona de Ofertas Destacadas</h4>
+                <p>Aquí construiremos el carrusel con las flechas laterales que muestra varios juegos a la vez.</p>
+            </div>
+
+            <!-- ZONA MORADA (Catálogo Dinámico con Pestañas) -->
+            <div class="p-5 text-bg-dark rounded" style="border: 3px solid #6f42c1;">
+                <h4 class="fw-bold mb-3" style="color: #d63384;">Catálogo "Menú"</h4>
+                <p>Aquí irá el sistema de pestañas (Videojuegos, Figuras, Mesa) y la lista interactiva donde la imagen cambia al pasar el mouse.</p>
+            </div>
+
+        </div> <!-- Fin Columna Derecha -->
+
+    </div> <!-- Fin Fila 2 -->
+
+</div> <!-- Fin Contenedor Principal -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Seleccionamos todos los banners interactivos
+        const banners = document.querySelectorAll('.banner-interactivo');
+
+        banners.forEach(banner => {
+            const img = banner.querySelector('.banner-img');
+            const video = banner.querySelector('.banner-video');
+
+            // Cuando el mouse entra al banner
+            banner.addEventListener('mouseenter', () => {
+                img.style.opacity = '0'; // Desvanece la imagen
+                video.play();            // Le da Play al video
+            });
+
+            // Cuando el mouse sale del banner
+            banner.addEventListener('mouseleave', () => {
+                img.style.opacity = '1'; // Vuelve a mostrar la imagen
+                video.pause();           // Pausa el video
+                video.currentTime = 0;   // Lo reinicia al segundo 0 para que siempre empiece desde el principio al volver a entrar
+            });
+        });
+    });
+</script>
+
+
 {% endblock %}
