@@ -34,6 +34,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tienda',
+
+    # Herramientas para la API y Seguridad
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +136,12 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
+# Configuración global de Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # Le decimos a Django que acepte Tokens como método de seguridad
+        'rest_framework.authentication.TokenAuthentication',
+        # Mantenemos la sesión normal por si queremos probar desde el navegador web
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}

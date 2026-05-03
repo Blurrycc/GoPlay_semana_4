@@ -38,7 +38,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib import messages
-from .models import PerfilUsuario # Asegúrate de importar el nuevo modelo
+from .models import PerfilUsuario
+
+
 
 def registro(request):
     if request.method == 'POST':
@@ -306,3 +308,35 @@ def editar_producto(request, id):
 
     contexto = {'producto': producto, 'categorias': categorias}
     return render(request, 'tienda/editar_producto.html', contexto)
+
+
+
+# Importaciones necesarias para la API y la Seguridad por Token
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from .serializers import CategoriaSerializer, ProductoSerializer
+
+# ==========================================
+# API 1: Listar Categorías
+# ==========================================
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def api_listar_categorias(request):
+    categorias = Categoria.objects.all()
+    serializer = CategoriaSerializer(categorias, many=True)
+    return Response(serializer.data)
+
+# ==========================================
+# API 2: Listar Productos del Catálogo
+# ==========================================
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def api_listar_productos(request):
+    productos = Producto.objects.all()
+    serializer = ProductoSerializer(productos, many=True)
+    return Response(serializer.data)
+
+
+def novedades(request): 
+    return render(request, 'tienda/novedades.html')

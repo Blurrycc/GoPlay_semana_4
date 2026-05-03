@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views # Importamos las vistas creadas en tienda/views.py
 from django.contrib.auth import views as auth_views
+from rest_framework.authtoken.views import obtain_auth_token
+
 
 urlpatterns = [
     path('', views.index, name='index'), # La ruta vacía es el inicio
@@ -26,5 +28,16 @@ urlpatterns = [
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="tienda/recuperar_enviado.html"), name="password_reset_done"),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="tienda/recuperar_confirmar.html"), name="password_reset_confirm"),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="tienda/recuperar_completo.html"), name="password_reset_complete"),
+
+
+    # Rutas para las APIs Propias
+    path('api/categorias/', views.api_listar_categorias, name='api_categorias'),
+    path('api/productos/', views.api_listar_productos, name='api_productos'),
+
+    # Ruta para generar el Token de seguridad
+    path('api/token/', obtain_auth_token, name='api_token'),
+
+
+    path('novedades/', views.novedades, name='novedades')
 ]
 
