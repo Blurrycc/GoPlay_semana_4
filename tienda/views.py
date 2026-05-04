@@ -11,7 +11,12 @@ from django.core.exceptions import ValidationError
 
 # Vista de la página principal
 def index(request):
-    return render(request, 'tienda/index.html')
+    videojuegos = Producto.objects.filter(categoria__nombre='Videojuegos')
+    
+    context = {
+        'videojuegos': videojuegos,
+    }
+    return render(request, 'tienda/index.html', context)
 
 # Vistas de Usuario
 def login_usuario(request): # Le cambiamos el nombre ligeramente para que no choque con la función 'login' de Django
@@ -340,3 +345,14 @@ def api_listar_productos(request):
 
 def novedades(request): 
     return render(request, 'tienda/novedades.html')
+
+def detalle_producto(request, id):
+    # Buscamos el juego exacto que coincida con el ID de la URL
+    # Si no lo encuentra, arroja el error 404 automáticamente
+    juego = get_object_or_404(Producto, id=id)
+    
+    context = {
+        'juego': juego,
+    }
+    
+    return render(request, 'tienda/detalle_producto.html', context)

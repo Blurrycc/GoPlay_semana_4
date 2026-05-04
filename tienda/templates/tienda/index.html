@@ -10,8 +10,7 @@
     <!-- ========================================== -->
     <!-- FILA 1: Banners Interactivos  -->
     <!-- ========================================== -->
-<div class="row mb-5 g-4"> 
-        
+    <div class="row mb-5 g-4"> 
         <!-- Banner 1: Hades -->
         <div class="col-12 col-md-4">
             <div class="banner-interactivo border border-secondary border-2">
@@ -45,31 +44,30 @@
     <!-- ========================================== -->
     <!-- FILA 2: CONTENIDO PRINCIPAL DIVIDIDO       -->
     <!-- ========================================== -->
-    <div class="row">
-        
+    <div class="row">           
         <!-- COLUMNA IZQUIERDA: CATEGORIAS -->
         <div class="col-12 col-lg-3 mb-4">
             <div class="p-4 h-100 text-bg-dark rounded shadow-lg border-start border-warning border-5">
                 <h5 class="text-warning fw-bold text-uppercase mb-4">
                     Explorar Categorías
                 </h5>
-                
+                    
                 <div class="d-flex flex-column gap-3">
                     <!-- Categoría 1 -->
                     <a href="{% url 'categorias_accion' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
                         Acción
                     </a>
-                    
+                        
                     <!-- Categoría 2 -->
                     <a href="{% url 'categorias_aventura' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
                         Aventura
                     </a>
-                    
+                        
                     <!-- Categoría 3 -->
                     <a href="{% url 'categorias_disparos' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
                         Disparos
                     </a>
-                    
+                        
                     <!-- Categoría 4 -->
                     <a href="{% url 'categorias_estrategia' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
                         Estrategia
@@ -93,220 +91,290 @@
             </div>
         </div>
 
-        <!-- COLUMNA DERECHA: Área gigante para Ofertas y Catálogo -->
-        <!-- Ocupa las 9 columnas restantes -->
-        <div class="col-12 col-lg-9">
-            
-            <!-- AREA DE OFERTAS -->
-            <div class="p-4 mb-5 text-bg-dark rounded shadow-lg">
+            <!-- COLUMNA DERECHA: Área gigante para Ofertas y Catálogo -->
+            <div class="col-12 col-lg-9">
                 
-                <!-- Encabezado y Controles del Carrusel -->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h5 class="text-info fw-bold text-uppercase m-0">Ofertas Especiales</h5>
-                    <div>
-                        <button class="btn btn-outline-info btn-sm me-1" type="button" data-bs-target="#carruselOfertas" data-bs-slide="prev">
-                            &lt; <!-- Símbolo Menor que -->
-                        </button>
-                        <button class="btn btn-outline-info btn-sm" type="button" data-bs-target="#carruselOfertas" data-bs-slide="next">
-                            &gt; <!-- Símbolo Mayor que -->
-                        </button>
+                <!-- AREA DE OFERTAS -->
+                <div class="p-4 mb-5 text-bg-dark rounded shadow-lg">
+                    
+                    <!-- Encabezado y Controles del Carrusel -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="text-info fw-bold text-uppercase m-0">Ofertas Especiales</h5>
+                        <div>
+                            <button class="btn btn-outline-info btn-sm me-1" type="button" data-bs-target="#carruselOfertas" data-bs-slide="prev">
+                                &lt; <!-- Símbolo Menor que -->
+                            </button>
+                            <button class="btn btn-outline-info btn-sm" type="button" data-bs-target="#carruselOfertas" data-bs-slide="next">
+                                &gt; <!-- Símbolo Mayor que -->
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Contenedor del Carrusel -->
-                <div id="carruselOfertas" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner"> 
-                        <!-- ========================================== -->
-                        <!-- PÁGINA 1: 2 Grandes + 2 Pequeños Apilados  -->
-                        <!-- ========================================== -->
-                        <div class="carousel-item active">
-                            <div class="row g-3 align-items-stretch" style="height: 380px;">
-                                
-                                <!-- Juego Grande 1 -->
-                                <div class="col-12 col-md-4">
-                                    <div class="card bg-secondary text-white h-100 border-0 shadow">
-                                        <img src="{% static 'tienda/img/pacific_drive.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="Pacific Drive">
-                                        <div class="card-body d-flex flex-column p-3">  
-                                            <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Oferta del fin de semana</p>
-                                            <h5 class="card-title fw-bold text-truncate">Pacific Drive</h5>
-                                            <div class="d-inline-flex align-items-center bg-dark rounded p-2 mt-2 aling-self-start">
-                                                <span class="badge bg-success fs-5 p-2 me-3">-67%</span>
-                                                <div class="text-end lh-1 pe-2">
-                                                    <small class="text-decoration-line-through text-secondary">CLP$ 15.500</small><br>
-                                                    <span class="text-info fw-bold fs-5">CLP$ 5.115</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Juego Grande 2 -->
-                                <div class="col-12 col-md-4">
-                                    <div class="card bg-secondary text-white h-100 border-0 shadow">
-                                        <img src="{% static 'tienda/img/nomoreroominhell2.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="No More Room in Hell">
-                                        <div class="card-body d-flex flex-column p-3">
-                                            <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Fin de semana gratis</p>
-                                            <h5 class="card-title fw-bold text-truncate">No More Room in Hell 2</h5>
-                                            <div class="d-inline-flex align-items-center bg-dark rounded p-2 mt-2 aling-self-start">
-                                                <span class="badge bg-success fs-5 p-2 me-3">-35%</span>
-                                                <div class="text-end lh-1 pe-2">
-                                                    <small class="text-decoration-line-through text-secondary">CLP$ 15.500</small><br>
-                                                    <span class="text-info fw-bold fs-5">CLP$ 10.075</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Columna Derecha: 2 Pequeños Apilados -->
-                                <div class="col-12 col-md-4 d-flex flex-column gap-3">
-                                    <!-- Pequeño 1 -->
-                                    <div class="card bg-secondary text-white border-0 shadow flex-grow-1">
-                                        <img src="{% static 'tienda/img/agentlemensdispute.jpg' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="A Gentleman's Dispute">
-                                        <div class="card-body p-2 d-flex justify-content-between align-items-end">
-                                            <!-- NUEVO BLOQUE DE PRECIO OSCURO -->
-                                            <div class="d-flex align-items-center bg-dark rounded p-1">
-                                                <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-60%</span>
-                                                <div class="text-end lh-1 pe-1">
-                                                    <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 7.000</small><br>
-                                                    <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 2.800</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <!-- Contenedor del Carrusel -->
+                    <div id="carruselOfertas" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner"> 
+                            <!-- ========================================== -->
+                            <!-- PÁGINA 1: 2 Grandes + 2 Pequeños Apilados  -->
+                            <!-- ========================================== -->
+                            <div class="carousel-item active">
+                                <div class="row g-3 align-items-stretch" style="height: 380px;">
                                     
-                                    <!-- Pequeño 2 -->
-                                    <div class="card bg-secondary text-white border-0 shadow flex-grow-1">
-                                        <img src="{% static 'tienda/img/the_forest.jpg' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="The Forest">
-                                        <div class="card-body p-2 d-flex justify-content-between align-items-end">                      
-                                            <!-- NUEVO BLOQUE DE PRECIO OSCURO -->
-                                            <div class="d-flex align-items-center bg-dark rounded p-1">
-                                                <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-90%</span>
-                                                <div class="text-end lh-1 pe-1">
-                                                    <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 10.500</small><br>
-                                                    <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 1.050</span>
+                                    <!-- Juego Grande 1 -->
+                                    <div class="col-12 col-md-4">
+                                        <div class="card bg-secondary text-white h-100 border-0 shadow">
+                                            <img src="{% static 'tienda/img/pacific_drive.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="Pacific Drive">
+                                            <div class="card-body d-flex flex-column p-3">  
+                                                <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Oferta del fin de semana</p>
+                                                <h5 class="card-title fw-bold text-truncate">Pacific Drive</h5>
+                                                <div class="d-inline-flex align-items-center bg-dark rounded p-2 mt-2 aling-self-start">
+                                                    <span class="badge bg-success fs-5 p-2 me-3">-67%</span>
+                                                    <div class="text-end lh-1 pe-2">
+                                                        <small class="text-decoration-line-through text-secondary">CLP$ 15.500</small><br>
+                                                        <span class="text-info fw-bold fs-5">CLP$ 5.115</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </div>
-                        </div>
-
-                        <!-- ========================================== -->
-                        <!-- PÁGINA 2: 1 Grande Izquierda + Grilla 2x2 Derecha -->
-                        <!-- ========================================== -->
-                        <div class="carousel-item">
-                            <div class="row g-3 align-items-stretch" style="height: 380px;">
-                                
-                                <!-- Juego Grande Izquierda -->
-                                <div class="col-12 col-md-4">
-                                    <div class="card bg-secondary text-white h-100 border-0 shadow">
-                                        <img src="{% static 'tienda/img/deeprock_galactic.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="Deep Rock Galactic">
-                                        <div class="card-body d-flex flex-column p-3">
-                                            <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Oferta del fin de semana</p>
-                                            <h5 class="card-title fw-bold text-truncate">Deep Rock Galactic</h5>
-                                            <div class="d-inline-flex align-items-center bg-dark rounded p-2 mt-2 aling-self-start">
-                                                <span class="badge bg-success fs-5 p-2 me-3">-30%</span>
-                                                <div class="text-end lh-1 pe-2">
-                                                    <small class="text-decoration-line-through text-secondary">CLP$ 7.300</small><br>
-                                                    <span class="text-info fw-bold fs-5">CLP$ 5.110</span>
+                                    <!-- Juego Grande 2 -->
+                                    <div class="col-12 col-md-4">
+                                        <div class="card bg-secondary text-white h-100 border-0 shadow">
+                                            <img src="{% static 'tienda/img/nomoreroominhell2.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="No More Room in Hell">
+                                            <div class="card-body d-flex flex-column p-3">
+                                                <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Fin de semana gratis</p>
+                                                <h5 class="card-title fw-bold text-truncate">No More Room in Hell 2</h5>
+                                                <div class="d-inline-flex align-items-center bg-dark rounded p-2 mt-2 aling-self-start">
+                                                    <span class="badge bg-success fs-5 p-2 me-3">-35%</span>
+                                                    <div class="text-end lh-1 pe-2">
+                                                        <small class="text-decoration-line-through text-secondary">CLP$ 15.500</small><br>
+                                                        <span class="text-info fw-bold fs-5">CLP$ 10.075</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Grilla 2x2 Derecha (Alineación Perfecta Flexbox) -->
-                                <div class="col-12 col-md-8">
-                                    <div class="d-flex flex-column gap-3 h-100">
+                                    <!-- Columna Derecha: 2 Pequeños Apilados -->
+                                    <div class="col-12 col-md-4 d-flex flex-column gap-3">
+                                        <!-- Pequeño 1 -->
+                                        <div class="card bg-secondary text-white border-0 shadow flex-grow-1">
+                                            <img src="{% static 'tienda/img/agentlemensdispute.jpg' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="A Gentleman's Dispute">
+                                            <div class="card-body p-2 d-flex justify-content-between align-items-end">
+                                                <!-- NUEVO BLOQUE DE PRECIO OSCURO -->
+                                                <div class="d-flex align-items-center bg-dark rounded p-1">
+                                                    <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-60%</span>
+                                                    <div class="text-end lh-1 pe-1">
+                                                        <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 7.000</small><br>
+                                                        <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 2.800</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         
-                                        <!-- Fila Superior -->
-                                        <div class="d-flex gap-3 flex-grow-1">
-                                            <!-- Cuadro 1 -->
-                                            <div class="card bg-secondary text-white border-0 shadow w-50">
-                                                <img src="{% static 'tienda/img/nioh3.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Nioh 3">
-                                                <div class="card-body p-2 d-flex flex-column justify-content-end">
-                                                    <div class="d-flex justify-content-end align-items-end">
-                                                        <div class="d-flex align-items-center bg-dark rounded p-1">
-                                                            <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-40%</span>
-                                                            <div class="text-end lh-1 pe-1">
-                                                                <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 4.200</small><br>
-                                                                <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 2.520</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- Cuadro 2 -->
-                                            <div class="card bg-secondary text-white border-0 shadow w-50">
-                                                <img src="{% static 'tienda/img/the_witcher3.png' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="The Witcher 3">
-                                                <div class="card-body p-2 d-flex flex-column justify-content-end">
-                                                    <div class="d-flex justify-content-end align-items-end">
-                                                        <div class="d-flex align-items-center bg-dark rounded p-1">
-                                                            <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-75%</span>
-                                                            <div class="text-end lh-1 pe-1">
-                                                                <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 19.900</small><br>
-                                                                <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 4.975</span>
-                                                            </div>
-                                                        </div>
+                                        <!-- Pequeño 2 -->
+                                        <div class="card bg-secondary text-white border-0 shadow flex-grow-1">
+                                            <img src="{% static 'tienda/img/the_forest.jpg' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="The Forest">
+                                            <div class="card-body p-2 d-flex justify-content-between align-items-end">                      
+                                                <!-- NUEVO BLOQUE DE PRECIO OSCURO -->
+                                                <div class="d-flex align-items-center bg-dark rounded p-1">
+                                                    <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-90%</span>
+                                                    <div class="text-end lh-1 pe-1">
+                                                        <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 10.500</small><br>
+                                                        <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 1.050</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <!-- Fila Inferior -->
-                                        <div class="d-flex gap-3 flex-grow-1">
-                                            <!-- Cuadro 3 -->
-                                            <div class="card bg-secondary text-white border-0 shadow w-50">
-                                                <img src="{% static 'tienda/img/cyberpunk2077.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Cyberpunk2077">
-                                                <div class="card-body p-2 d-flex flex-column justify-content-end">
-                                                    <div class="d-flex justify-content-end align-items-end">
-                                                        <div class="d-flex align-items-center bg-dark rounded p-1">
-                                                            <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-50%</span>
-                                                            <div class="text-end lh-1 pe-1">
-                                                                <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 21.500</small><br>
-                                                                <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 10.750</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- Cuadro 4 -->
-                                            <div class="card bg-secondary text-white border-0 shadow w-50">
-                                                <img src="{% static 'tienda/img/street_fighter_6.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Street Fighter 6">
-                                                <div class="card-body p-2 d-flex flex-column justify-content-end">
-                                                    <div class="d-flex justify-content-end align-items-end">
-                                                        <div class="d-flex align-items-center bg-dark rounded p-1">
-                                                            <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-85%</span>
-                                                              <div class="text-end lh-1 pe-1">
-                                                                <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 55.900</small><br>
-                                                                <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 8.385</span>
-                                                            </div>
-                                                        </div>
+                                </div>
+                            </div>
+
+                            <!-- ========================================== -->
+                            <!-- PÁGINA 2: 1 Grande Izquierda + Grilla 2x2 Derecha -->
+                            <!-- ========================================== -->
+                            <div class="carousel-item">
+                                <div class="row g-3 align-items-stretch" style="height: 380px;">
+                                    
+                                    <!-- Juego Grande Izquierda -->
+                                    <div class="col-12 col-md-4">
+                                        <div class="card bg-secondary text-white h-100 border-0 shadow">
+                                            <img src="{% static 'tienda/img/deeprock_galactic.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="Deep Rock Galactic">
+                                            <div class="card-body d-flex flex-column p-3">
+                                                <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Oferta del fin de semana</p>
+                                                <h5 class="card-title fw-bold text-truncate">Deep Rock Galactic</h5>
+                                                <div class="d-inline-flex align-items-center bg-dark rounded p-2 mt-2 aling-self-start">
+                                                    <span class="badge bg-success fs-5 p-2 me-3">-30%</span>
+                                                    <div class="text-end lh-1 pe-2">
+                                                        <small class="text-decoration-line-through text-secondary">CLP$ 7.300</small><br>
+                                                        <span class="text-info fw-bold fs-5">CLP$ 5.110</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
+                                    <!-- Grilla 2x2 Derecha (Alineación Perfecta Flexbox) -->
+                                    <div class="col-12 col-md-8">
+                                        <div class="d-flex flex-column gap-3 h-100">
+                                            
+                                            <!-- Fila Superior -->
+                                            <div class="d-flex gap-3 flex-grow-1">
+                                                <!-- Cuadro 1 -->
+                                                <div class="card bg-secondary text-white border-0 shadow w-50">
+                                                    <img src="{% static 'tienda/img/nioh3.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Nioh 3">
+                                                    <div class="card-body p-2 d-flex flex-column justify-content-end">
+                                                        <div class="d-flex justify-content-end align-items-end">
+                                                            <div class="d-flex align-items-center bg-dark rounded p-1">
+                                                                <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-40%</span>
+                                                                <div class="text-end lh-1 pe-1">
+                                                                    <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 4.200</small><br>
+                                                                    <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 2.520</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Cuadro 2 -->
+                                                <div class="card bg-secondary text-white border-0 shadow w-50">
+                                                    <img src="{% static 'tienda/img/the_witcher3.png' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="The Witcher 3">
+                                                    <div class="card-body p-2 d-flex flex-column justify-content-end">
+                                                        <div class="d-flex justify-content-end align-items-end">
+                                                            <div class="d-flex align-items-center bg-dark rounded p-1">
+                                                                <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-75%</span>
+                                                                <div class="text-end lh-1 pe-1">
+                                                                    <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 19.900</small><br>
+                                                                    <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 4.975</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Fila Inferior -->
+                                            <div class="d-flex gap-3 flex-grow-1">
+                                                <!-- Cuadro 3 -->
+                                                <div class="card bg-secondary text-white border-0 shadow w-50">
+                                                    <img src="{% static 'tienda/img/cyberpunk2077.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Cyberpunk2077">
+                                                    <div class="card-body p-2 d-flex flex-column justify-content-end">
+                                                        <div class="d-flex justify-content-end align-items-end">
+                                                            <div class="d-flex align-items-center bg-dark rounded p-1">
+                                                                <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-50%</span>
+                                                                <div class="text-end lh-1 pe-1">
+                                                                    <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 21.500</small><br>
+                                                                    <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 10.750</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Cuadro 4 -->
+                                                <div class="card bg-secondary text-white border-0 shadow w-50">
+                                                    <img src="{% static 'tienda/img/street_fighter_6.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Street Fighter 6">
+                                                    <div class="card-body p-2 d-flex flex-column justify-content-end">
+                                                        <div class="d-flex justify-content-end align-items-end">
+                                                            <div class="d-flex align-items-center bg-dark rounded p-1">
+                                                                <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-85%</span>
+                                                                <div class="text-end lh-1 pe-1">
+                                                                    <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 55.900</small><br>
+                                                                    <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 8.385</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ZONA MORADA (Catálogo Dinámico con Pestañas) -->
-            <div class="p-5 text-bg-dark rounded" style="border: 3px solid #6f42c1;">
-                <h4 class="fw-bold mb-3" style="color: #d63384;">Catálogo "Menú"</h4>
-                <p>Aquí irá el sistema de pestañas (Videojuegos, Figuras, Mesa) y la lista interactiva donde la imagen cambia al pasar el mouse.</p>
-            </div>
+                <!-- Catálogo Dinámico con Pestañas -->
+                <div class="container mt-5">
+                    <!-- Pestañas (Tabs) de Categorías -->
+                    <ul class="nav nav-tabs border-dark mb-0" id="categoriaTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active bg-dark text-white border-dark" id="videojuegos-tab" data-bs-toggle="tab" data-bs-target="#videojuegos" type="button" role="tab">Videojuegos</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-secondary border-dark" id="mesa-tab" data-bs-toggle="tab" data-bs-target="#mesa" type="button" role="tab">Juegos de Mesa</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-secondary border-dark" id="figuras-tab" data-bs-toggle="tab" data-bs-target="#figuras" type="button" role="tab">Figuras Colec...</button>
+                        </li>
+                    </ul>
 
-        </div> <!-- Fin Columna Derecha -->
+                    <!-- Contenedor Principal (Fondo oscuro) -->
+                    <div class="row g-0 bg-dark border border-dark p-2">
+                        
+                        <!-- COLUMNA IZQUIERDA: Lista de Productos -->
+                        <div class="col-md-7 col-lg-8">
+                            <div class="tab-content" id="categoriaTabsContent">
+                                
+                                <!-- Tab: Videojuegos -->
+                                <div class="tab-pane fade show active" id="videojuegos" role="tabpanel">
+                                    <div class="list-group list-group-flush" id="lista-productos">
+                                        
+                                        {% for juego in videojuegos %}
+                                        <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-secondary d-flex align-items-center p-2 item-hover-juego" 
+                                            data-titulo="{{ juego.nombre }}" 
+                                            data-precio="${{ juego.precio }}" 
+                                            data-img="{% if juego.imagen %}{{ juego.imagen.url }}{% else %}URL_IMAGEN_POR_DEFECTO{% endif %}"
+                                            data-tags="{{ juego.categoria.nombre }}">
+                                        
+                                            <img src="{% if juego.imagen %}{{ juego.imagen.url }}{% endif %}" alt="{{ juego.nombre }}" class="rounded me-3" style="width: 120px; height: 56px; object-fit: cover;">
+                                            
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-0 fw-bold">{{ juego.nombre }}</h6>
+                                                <small class="text-secondary"><i class="fab fa-windows"></i></small>
+                                            </div>
+                                            
+                                            <div class="text-end">
+                                                <span class="fw-bold text-info">${{ juego.precio }}</span>
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
+                                <!-- Aquí irían los otros Tab-Panes (Mesa, Figuras) -->
+                            </div>
+                        </div>
+
+                        <!-- COLUMNA DERECHA: Previsualización al pasar el mouse -->
+                        <div class="col-md-5 col-lg-4 d-none d-md-block px-3">
+                            <div class="sticky-top pt-2" id="panel-preview">
+                                <h4 id="preview-titulo" class="text-white fw-light mb-3">Pasa el mouse sobre un juego</h4>
+                                
+                                <div class="bg-secondary rounded p-2 mb-2 text-center" style="height: 180px;">
+                                    <img id="preview-img-principal" src="" alt="" class="img-fluid rounded h-100 w-100" style="object-fit: cover; display: none;">
+                                </div>
+
+                                <!-- Simulación de las capturas de pantalla de la derecha -->
+                                <div class="row g-1">
+                                    <div class="col-6"><div class="bg-secondary rounded" style="height: 60px; opacity: 0.5;"></div></div>
+                                    <div class="col-6"><div class="bg-secondary rounded" style="height: 60px; opacity: 0.5;"></div></div>
+                                    <div class="col-6"><div class="bg-secondary rounded" style="height: 60px; opacity: 0.5;"></div></div>
+                                    <div class="col-6"><div class="bg-secondary rounded" style="height: 60px; opacity: 0.5;"></div></div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <span id="preview-tags" class="badge bg-dark text-secondary border border-secondary">Etiquetas aparecerán aquí</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- Fin Columna Derecha -->
 
     </div> <!-- Fin Fila 2 -->
 
@@ -336,6 +404,53 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const itemsJuego = document.querySelectorAll('.item-hover-juego');
+        const previewTitulo = document.getElementById('preview-titulo');
+        const previewImgPrincipal = document.getElementById('preview-img-principal');
+        const previewTags = document.getElementById('preview-tags');
+
+        itemsJuego.forEach(item => {
+            // El evento 'mouseenter' se dispara cuando el mouse entra al área del elemento
+            item.addEventListener('mouseenter', function() {
+                // Extraemos los datos del HTML
+                const titulo = this.getAttribute('data-titulo');
+                const imgSrc = this.getAttribute('data-img');
+                const tags = this.getAttribute('data-tags');
+
+                // Inyectamos los datos en el panel derecho
+                previewTitulo.textContent = titulo;
+                
+                previewImgPrincipal.src = imgSrc;
+                previewImgPrincipal.style.display = 'block'; // Mostramos la imagen
+
+                // Formateamos las etiquetas (separadas por coma) en badges de Bootstrap
+                const etiquetasArray = tags.split(',');
+                let badgesHTML = '';
+                etiquetasArray.forEach(tag => {
+                    badgesHTML += `<span class="badge bg-secondary me-1 mb-1">${tag.trim()}</span>`;
+                });
+                previewTags.innerHTML = badgesHTML;
+            });
+        });
+    });
+</script>
+
+<style>
+    .item-hover-juego {
+        transition: background-color 0.2s ease;
+    }
+    .item-hover-juego:hover {
+        background-color: #2a475e !important; /* Azul oscuro característico de Steam */
+        border-color: #2a475e !important;
+    }
+    /* Estilo para las pestañas inactivas */
+    .nav-tabs .nav-link {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+</style>
 
 
 {% endblock %}

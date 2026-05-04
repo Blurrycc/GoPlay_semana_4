@@ -38,6 +38,11 @@ urlpatterns = [
     path('api/token/', obtain_auth_token, name='api_token'),
 
 
-    path('novedades/', views.novedades, name='novedades')
+    path('novedades/', views.novedades, name='novedades'),
+
+    # Ruta dinámica para el detalle del producto:
+    path('producto/<int:id>/', views.detalle_producto, name='detalle_producto'),
+
+    
 ]
 
