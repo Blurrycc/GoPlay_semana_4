@@ -11,10 +11,14 @@ from django.core.exceptions import ValidationError
 
 # Vista de la página principal
 def index(request):
-    videojuegos = Producto.objects.filter(categoria__nombre='Videojuegos')
+    juegos_mesa = Producto.objects.filter(categoria__nombre__icontains='mesa')
+    figuras = Producto.objects.filter(categoria__nombre__icontains='figura')
+    videojuegos = Producto.objects.filter(categoria__nombre__icontains='Videojuegos')
     
     context = {
         'videojuegos': videojuegos,
+        'juegos_mesa': juegos_mesa,
+        'figuras': figuras
     }
     return render(request, 'tienda/index.html', context)
 

@@ -345,7 +345,73 @@
                                         
                                     </div>
                                 </div>
-                                <!-- Aquí irían los otros Tab-Panes (Mesa, Figuras) -->
+
+                                <!-- Tab: Juegos de Mesa -->
+                                <div class="tab-pane fade" id="mesa" role="tabpanel">
+                                    <div class="list-group list-group-flush">
+                                        
+                                        {% for producto in juegos_mesa %}
+                                        <a href="{% url 'detalle_producto' producto.id %}" class="list-group-item list-group-item-action bg-dark text-white border-secondary d-flex align-items-center p-2 item-hover-juego" 
+                                        data-titulo="{{ producto.nombre }}" 
+                                        data-precio="${{ producto.precio }}" 
+                                        data-img="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}"
+                                        data-tags="{{ producto.categoria.nombre }}">
+                                        
+                                            <img src="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}" alt="{{ producto.nombre }}" class="rounded me-3" style="width: 120px; height: 56px; object-fit: cover;">
+                                            
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-0 fw-bold">{{ producto.nombre }}</h6>
+                                                <small class="text-secondary"><i class="fas fa-dice"></i></small>
+                                            </div>
+                                            
+                                            <div class="text-end">
+                                                <span class="fw-bold text-info">${{ producto.precio }}</span>
+                                            </div>
+                                        </a>
+                                        {% empty %}
+                                        <div class="p-4 text-center text-secondary">
+                                            <p>Aún no hay juegos de mesa en el catálogo.</p>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+
+                                <!-- Tab: Figuras Coleccionables -->
+                                <div class="tab-pane fade" id="figuras" role="tabpanel">
+                                    <div class="list-group list-group-flush">
+                                        
+                                        {% for producto in figuras %}
+                                        <a href="{% url 'detalle_producto' producto.id %}" class="list-group-item list-group-item-action bg-dark text-white border-secondary d-flex align-items-center p-2 item-hover-juego" 
+                                        data-titulo="{{ producto.nombre }}" 
+                                        data-precio="${{ producto.precio }}" 
+                                        data-img="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}"
+                                        data-tags="{{ producto.categoria.nombre }}">
+                                        
+                                            <img src="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}" alt="{{ producto.nombre }}" class="rounded me-3" style="width: 120px; height: 56px; object-fit: cover;">
+                                            
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-0 fw-bold">{{ producto.nombre }}</h6>
+                                                <small class="text-secondary"><i class="fas fa-cube"></i></small>
+                                            </div>
+                                            
+                                            <div class="text-end">
+                                                <span class="fw-bold text-info">${{ producto.precio }}</span>
+                                            </div>
+                                        </a>
+                                        {% empty %}
+                                        <div class="p-4 text-center text-secondary">
+                                            <p>Aún no hay figuras coleccionables en el catálogo.</p>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+
+
+
+
+
                             </div>
                         </div>
 
