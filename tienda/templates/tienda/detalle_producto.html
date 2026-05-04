@@ -1,0 +1,113 @@
+{% extends 'tienda/base.html' %}
+{% load static %}
+
+{% block titulo %}{{ juego.nombre }} - Go Play!{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <!-- Título Superior -->
+    <h2 class="text-white fw-bold mb-4">{{ juego.nombre }}</h2>
+
+    <!-- BLOQUE SUPERIOR: Galería + Info Rápida -->
+    <div class="row bg-dark rounded shadow p-3 border border-secondary mb-5">
+        
+        <!-- Columna Izquierda: Visor Multimedia y Miniaturas -->
+        <div class="col-lg-8">
+            <!-- Visor Principal -->
+            <div class="bg-black rounded d-flex align-items-center justify-content-center mb-2 overflow-hidden" style="height: 400px;">
+                <img id="visor-principal" src="{% if juego.imagen %}{{ juego.imagen.url }}{% endif %}" alt="{{ juego.nombre }}" class="img-fluid h-100" style="object-fit: contain;">
+            </div>
+            
+            <!-- Cinta de Miniaturas (Galería) -->
+            <div class="d-flex gap-2 overflow-auto py-1" id="galeria-miniaturas">
+                <!-- 1. Tu imagen real (Activa por defecto) -->
+                <img src="{% if juego.imagen %}{{ juego.imagen.url }}{% endif %}" class="miniatura miniatura-activa rounded" onclick="cambiarImagen(this)">
+                
+                <!-- 2. Imágenes de relleno para simular capturas de pantalla -->
+                <img src="https://placehold.co/800x450/2a475e/FFF?text=Captura+1" class="miniatura rounded opacity-50" onclick="cambiarImagen(this)">
+                <img src="https://placehold.co/800x450/1b2838/FFF?text=Captura+2" class="miniatura rounded opacity-50" onclick="cambiarImagen(this)">
+                <img src="https://placehold.co/800x450/66c0f4/000?text=Captura+3" class="miniatura rounded opacity-50" onclick="cambiarImagen(this)">
+            </div>
+        </div>
+
+        <!-- Columna Derecha: Portada, Resumen y Compra -->
+        <div class="col-lg-4 d-flex flex-column pt-3 pt-lg-0">
+            <!-- Portada lateral (Estilo Steam) -->
+            <img src="{% if juego.imagen %}{{ juego.imagen.url }}{% endif %}" class="img-fluid rounded mb-3 d-none d-lg-block w-100" style="object-fit: cover; height: 160px;" alt="Portada">
+            
+            <!-- Descripción Corta (Cortamos a 30 palabras) -->
+            <p class="text-light small mb-4" style="text-align: justify;">
+                {{ juego.descripcion|truncatewords:30 }}
+            </p>
+
+            <div class="text-secondary small mb-3">
+                <strong>Categoría:</strong> <span class="text-info">{{ juego.categoria.nombre }}</span><br>
+                <strong>Stock disponible:</strong> {{ juego.stock }} unidades
+            </div>
+
+            <!-- Caja de Compra -->
+            <div class="bg-secondary p-3 rounded mt-auto border border-dark">
+                <h2 class="text-info fw-bold mb-3">${{ juego.precio }}</h2>
+                <button class="btn btn-success w-100 fw-bold py-2 mb-2">
+                    <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOQUE INFERIOR: Descripción Detallada -->
+    <div class="row text-white mb-5">
+        <div class="col-lg-8">
+            <h4 class="fw-bold border-bottom border-info pb-2 mb-4">Acerca de este producto</h4>
+            <!-- white-space: pre-line respeta los saltos de línea que pusiste en el panel de admin -->
+            <p class="text-light" style="white-space: pre-line; line-height: 1.8; font-size: 1.1rem;">
+                {{ juego.descripcion }}
+            </p>
+        </div>
+        
+        <!-- Banner promocional o imagen extra lateral -->
+        <div class="col-lg-4 mt-4 mt-lg-0">
+            <img src="https://placehold.co/400x600/171a21/4bc1fc?text=Banner+Extra\n(Opcional)" class="img-fluid rounded shadow" alt="Banner">
+        </div>
+    </div>
+</div>
+
+<!-- Estilos CSS Rápidos para las miniaturas -->
+<style>
+    .miniatura {
+        width: 140px; 
+        height: 80px; 
+        object-fit: cover; 
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 2px solid transparent;
+    }
+    .miniatura:hover {
+        opacity: 0.8 !important;
+    }
+    .miniatura-activa {
+        opacity: 1 !important;
+        border-color: #66c0f4 !important; /* Borde azul brillante al seleccionar */
+    }
+</style>
+
+<!-- Motor JavaScript para la Galería -->
+<script>
+    function cambiarImagen(elementoImagen) {
+        // 1. Cambiamos la imagen del visor principal
+        const visor = document.getElementById('visor-principal');
+        visor.src = elementoImagen.src;
+
+        // 2. Le quitamos el borde azul y le bajamos la opacidad a todas las miniaturas
+        const miniaturas = document.querySelectorAll('.miniatura');
+        miniaturas.forEach(min => {
+            min.classList.remove('miniatura-activa');
+            min.classList.add('opacity-50');
+        });
+
+        // 3. Le ponemos el borde azul y opacidad full a la imagen que clickeamos
+        elementoImagen.classList.remove('opacity-50');
+        elementoImagen.classList.add('miniatura-activa');
+    }
+</script>
+{% endblock %}

@@ -324,7 +324,7 @@
                                     <div class="list-group list-group-flush" id="lista-productos">
                                         
                                         {% for juego in videojuegos %}
-                                        <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-secondary d-flex align-items-center p-2 item-hover-juego" 
+                                        <a href="{% url 'detalle_producto' juego.id %}" class="list-group-item list-group-item-action bg-dark text-white border-secondary d-flex align-items-center p-2 item-hover-juego" 
                                             data-titulo="{{ juego.nombre }}" 
                                             data-precio="${{ juego.precio }}" 
                                             data-img="{% if juego.imagen %}{{ juego.imagen.url }}{% else %}URL_IMAGEN_POR_DEFECTO{% endif %}"
