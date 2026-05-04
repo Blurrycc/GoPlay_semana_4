@@ -13,29 +13,29 @@
     <div class="row mb-5 g-4"> 
         <!-- Banner 1: Hades -->
         <div class="col-12 col-md-4">
-            <div class="banner-interactivo border border-secondary border-2">
+            <a href="{% url 'detalle_producto' 23 %}" class="banner-interactivo border border-secondary border-2 d-block text-decoration-none text-white">
                 <img src="{% static 'tienda/img/hades_portada.webp' %}" alt="Hades" class="banner-img">
                 <video src="{% static 'tienda/video/hades_gameplay.mp4' %}" class="banner-video" muted loop playsinline></video>
                 <h5 class="banner-titulo fw-bold">Hades</h5>
-            </div>
+            </a>
         </div>
 
         <!-- Banner 2: Borderlands 4 -->
         <div class="col-12 col-md-4">
-            <div class="banner-interactivo border border-secondary border-2">
+            <a href="{% url 'detalle_producto' 22 %}" class="banner-interactivo border border-secondary border-2 d-block text-decoration-none text-white">
                 <img src="{% static 'tienda/img/borderlands4_portada.webp' %}" alt="Borderlands 4" class="banner-img">
                 <video src="{% static 'tienda/video/borderlands4_gameplay.mp4' %}" class="banner-video" muted loop playsinline></video>
                 <h5 class="banner-titulo fw-bold">Borderlands 4</h5>
-            </div>
+            </a>
         </div>
 
         <!-- Banner 3: Megabonk -->
         <div class="col-12 col-md-4">
-            <div class="banner-interactivo border border-secondary border-2">
+            <a href="{% url 'detalle_producto' 24 %}" class="banner-interactivo border border-secondary border-2 d-block text-decoration-none text-white">
                 <img src="{% static 'tienda/img/megabonk_portada.webp' %}" alt="Megabonk" class="banner-img">
                 <video src="{% static 'tienda/video/megabonk_gameplay.mp4' %}" class="banner-video" muted loop playsinline></video>
                 <h5 class="banner-titulo fw-bold">Megabonk</h5>
-            </div>
+            </a>
         </div>
 
     </div>
@@ -121,7 +121,7 @@
                                     
                                     <!-- Juego Grande 1 -->
                                     <div class="col-12 col-md-4">
-                                        <div class="card bg-secondary text-white h-100 border-0 shadow">
+                                        <a href="{% url 'detalle_producto' 51 %}" class="card bg-secondary text-decoration-none text-white h-100 border-0 shadow">
                                             <img src="{% static 'tienda/img/pacific_drive.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="Pacific Drive">
                                             <div class="card-body d-flex flex-column p-3">  
                                                 <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Oferta del fin de semana</p>
@@ -134,12 +134,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
 
                                     <!-- Juego Grande 2 -->
                                     <div class="col-12 col-md-4">
-                                        <div class="card bg-secondary text-white h-100 border-0 shadow">
+                                        <a href="{% url 'detalle_producto' 50 %}" class="card bg-secondary text-decoration-none text-white h-100 border-0 shadow">
                                             <img src="{% static 'tienda/img/nomoreroominhell2.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="No More Room in Hell">
                                             <div class="card-body d-flex flex-column p-3">
                                                 <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Fin de semana gratis</p>
@@ -152,16 +152,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
 
                                     <!-- Columna Derecha: 2 Pequeños Apilados -->
                                     <div class="col-12 col-md-4 d-flex flex-column gap-3">
                                         <!-- Pequeño 1 -->
-                                        <div class="card bg-secondary text-white border-0 shadow flex-grow-1">
+                                        <a href="{% url 'detalle_producto' 49 %}" class="card bg-secondary text-decoration-none text-white border-0 shadow flex-grow-1">
                                             <img src="{% static 'tienda/img/agentlemensdispute.jpg' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="A Gentleman's Dispute">
                                             <div class="card-body p-2 d-flex justify-content-between align-items-end">
-                                                <!-- NUEVO BLOQUE DE PRECIO OSCURO -->
                                                 <div class="d-flex align-items-center bg-dark rounded p-1">
                                                     <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-60%</span>
                                                     <div class="text-end lh-1 pe-1">
@@ -170,13 +169,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                         
                                         <!-- Pequeño 2 -->
-                                        <div class="card bg-secondary text-white border-0 shadow flex-grow-1">
+                                        <a href="{% url 'detalle_producto' 48 %}" class="card bg-secondary text-decoration-none text-white border-0 shadow flex-grow-1">
                                             <img src="{% static 'tienda/img/the_forest.jpg' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="The Forest">
                                             <div class="card-body p-2 d-flex justify-content-between align-items-end">                      
-                                                <!-- NUEVO BLOQUE DE PRECIO OSCURO -->
                                                 <div class="d-flex align-items-center bg-dark rounded p-1">
                                                     <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-90%</span>
                                                     <div class="text-end lh-1 pe-1">
@@ -185,7 +183,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
 
                                 </div>
@@ -199,7 +197,7 @@
                                     
                                     <!-- Juego Grande Izquierda -->
                                     <div class="col-12 col-md-4">
-                                        <div class="card bg-secondary text-white h-100 border-0 shadow">
+                                        <a href="{% url 'detalle_producto' 47 %}" class="card bg-secondary text-decoration-none text-white h-100 border-0 shadow">
                                             <img src="{% static 'tienda/img/deeprock_galactic.jpg' %}" class="card-img-top h-50" style="object-fit: cover;" alt="Deep Rock Galactic">
                                             <div class="card-body d-flex flex-column p-3">
                                                 <p class="text-info fw-bold mt-1 mb-1 text-uppercase small">Oferta del fin de semana</p>
@@ -207,12 +205,12 @@
                                                 <div class="d-inline-flex align-items-center bg-dark rounded p-2 mt-2 aling-self-start">
                                                     <span class="badge bg-success fs-5 p-2 me-3">-30%</span>
                                                     <div class="text-end lh-1 pe-2">
-                                                        <small class="text-decoration-line-through text-secondary">CLP$ 7.300</small><br>
-                                                        <span class="text-info fw-bold fs-5">CLP$ 5.110</span>
+                                                        <small class="text-decoration-line-through text-secondary">CLP$ 15.300</small><br>
+                                                        <span class="text-info fw-bold fs-5">CLP$ 10.710</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
 
                                     <!-- Grilla 2x2 Derecha (Alineación Perfecta Flexbox) -->
@@ -222,23 +220,23 @@
                                             <!-- Fila Superior -->
                                             <div class="d-flex gap-3 flex-grow-1">
                                                 <!-- Cuadro 1 -->
-                                                <div class="card bg-secondary text-white border-0 shadow w-50">
+                                                <a href="{% url 'detalle_producto' 46 %}" class="card bg-secondary text-decoration-none text-white border-0 shadow w-50">
                                                     <img src="{% static 'tienda/img/nioh3.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Nioh 3">
                                                     <div class="card-body p-2 d-flex flex-column justify-content-end">
                                                         <div class="d-flex justify-content-end align-items-end">
                                                             <div class="d-flex align-items-center bg-dark rounded p-1">
                                                                 <span class="badge bg-success p-2 me-2" style="font-size: 0.85rem;">-40%</span>
                                                                 <div class="text-end lh-1 pe-1">
-                                                                    <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 4.200</small><br>
-                                                                    <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 2.520</span>
+                                                                    <small class="text-decoration-line-through text-secondary" style="font-size: 0.7rem;">CLP$ 18.200</small><br>
+                                                                    <span class="text-info fw-bold" style="font-size: 0.9rem;">CLP$ 10.920</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                                 
                                                 <!-- Cuadro 2 -->
-                                                <div class="card bg-secondary text-white border-0 shadow w-50">
+                                                <a href="{% url 'detalle_producto' 45 %}" class="card bg-secondary text-decoration-none text-white border-0 shadow w-50">
                                                     <img src="{% static 'tienda/img/the_witcher3.png' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="The Witcher 3">
                                                     <div class="card-body p-2 d-flex flex-column justify-content-end">
                                                         <div class="d-flex justify-content-end align-items-end">
@@ -251,13 +249,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
 
                                             <!-- Fila Inferior -->
                                             <div class="d-flex gap-3 flex-grow-1">
                                                 <!-- Cuadro 3 -->
-                                                <div class="card bg-secondary text-white border-0 shadow w-50">
+                                                <a href="{% url 'detalle_producto' 43 %}" class="card bg-secondary text-decoration-none text-white border-0 shadow w-50">
                                                     <img src="{% static 'tienda/img/cyberpunk2077.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Cyberpunk2077">
                                                     <div class="card-body p-2 d-flex flex-column justify-content-end">
                                                         <div class="d-flex justify-content-end align-items-end">
@@ -270,10 +268,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                                 
                                                 <!-- Cuadro 4 -->
-                                                <div class="card bg-secondary text-white border-0 shadow w-50">
+                                                <a href="{% url 'detalle_producto' 44 %}" class="card bg-secondary text-decoration-none text-white border-0 shadow w-50">
                                                     <img src="{% static 'tienda/img/street_fighter_6.webp' %}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="Street Fighter 6">
                                                     <div class="card-body p-2 d-flex flex-column justify-content-end">
                                                         <div class="d-flex justify-content-end align-items-end">
@@ -286,7 +284,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
 
                                         </div>
@@ -407,10 +405,6 @@
 
                                     </div>
                                 </div>
-
-
-
-
 
                             </div>
                         </div>
