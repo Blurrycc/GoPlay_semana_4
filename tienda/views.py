@@ -8,6 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.core.paginator import Paginator
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from .forms import PerfilUsuarioForm
 
 # Vista de la página principal
 def index(request):
@@ -42,13 +43,6 @@ def login_usuario(request): # Le cambiamos el nombre ligeramente para que no cho
 
     # Si solo está entrando a mirar la página, cargamos el HTML normal
     return render(request, 'tienda/login.html')
-
-from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
-from django.contrib import messages
-from .models import PerfilUsuario
-
 
 
 def registro(request):
@@ -121,29 +115,39 @@ def recuperar(request):
 
 
 # --- Vistas Protegidas ---
-@login_required(login_url='login')
+@login_required
 def perfil(request):
     if request.method == 'POST':
-        nuevo_nombre = request.POST.get('nombre_completo')
-        nuevo_correo = request.POST.get('email_usuario')
-        nueva_clave = request.POST.get('password_nueva') # Atrapamos la nueva clave del HTML
+        # Le pasamos los datos del POST y le decimos qué usuario estamos editando (instance)
+        form = PerfilUsuarioForm(request.POST, instance=request.user)
         
-        usuario = request.user
-        usuario.first_name = nuevo_nombre
-        usuario.email = nuevo_correo
-        
-        # Lógica para cambiar contraseña solo si el usuario escribió algo
-        if nueva_clave and nueva_clave.strip() != '':
-            usuario.set_password(nueva_clave) # Encripta la nueva clave para Oracle
-            usuario.save()
-            update_session_auth_hash(request, usuario) # Mantiene al usuario logueado con su nueva clave
-        else:
-            usuario.save() # Guarda solo nombre y correo
+        # ModelForm hace el trabajo de validación
+        if form.is_valid():
+            # Guardamos los datos base (nombre, apellido, email) pero aún no en la BD (commit=False)
+            usuario = form.save(commit=False)
             
-        messages.success(request, '¡Tus datos han sido actualizados con éxito!')
-        return redirect('perfil')
+            # Si el usuario escribió una nueva contraseña válida, la encriptamos y guardamos
+            nueva_password = form.cleaned_data.get('password')
+            if nueva_password:
+                usuario.set_password(nueva_password)
+                
+            usuario.save()
+            messages.success(request, '¡Tu perfil ha sido actualizado exitosamente!')
+            
+        else:
+            # Si las contraseñas no coinciden o falta un dato, extraemos el error del form
+            for error in form.non_field_errors():
+                messages.error(request, error)
+            messages.error(request, 'Ocurrió un error al actualizar. Por favor revisa los datos.')
 
-    return render(request, 'tienda/perfil.html')
+    else:
+        # Si entra por primera vez (GET), cargamos el form con sus datos actuales
+        form = PerfilUsuarioForm(instance=request.user)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'tienda/perfil.html', context)
 
 # Vistas de Tienda
 @login_required(login_url='login')
