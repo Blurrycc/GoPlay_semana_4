@@ -30,80 +30,194 @@
 <!-- MOTOR JAVASCRIPT PARA CONSUMIR APIs EXTERNAS -->
 <!-- ========================================== -->
 <script>
-    // CONSUMO API 1: Rick & Morty API API (Figuras Coleccionables)
+
+// ==========================================
+    // CONSUMO API 1: Rick & Morty API (SEGURIDAD MEJORADA)
+    // ==========================================
     async function obtenerColeccionables() {
+        const contenedor = document.getElementById('giveaways-container');
+        const loading = document.getElementById('loading-giveaways');
+
         try {
-            // Pedimos exactamente los personajes 1, 2, 3 y 4 (ultra rápido)
             const respuesta = await fetch('https://rickandmortyapi.com/api/character/1,2,3,4');
+            
+            // VALIDACIÓN HTTP ESTRICTA
+            // Verificamos si el servidor respondió con un error (ej. 404 o 500)
+            if (!respuesta.ok) {
+                throw new Error(`Error en la API: Estado ${respuesta.status}`);
+            }
+
             const datos = await respuesta.json();
             
-            const contenedor = document.getElementById('giveaways-container');
-            document.getElementById('loading-giveaways').style.display = 'none';
+            // Limpiamos el contenedor y ocultamos el loading
+            contenedor.innerHTML = ''; 
+            loading.style.display = 'none';
 
-            // Recorremos los 4 personajes que nos llegaron
             datos.forEach(figura => {
-                contenedor.innerHTML += `
-                    <div class="col-12 col-md-3">
-                        <div class="card bg-secondary text-white h-100 border-0 shadow p-3 text-center">
-                            <img src="${figura.image}" class="card-img-top rounded mx-auto" style="height: 150px; width: 150px; object-fit: cover;" alt="${figura.name}">
-                            <div class="card-body d-flex flex-column pb-0">
-                                <h6 class="card-title fw-bold text-truncate mt-2">${figura.name}</h6>
-                                <p class="small mb-2 text-warning">Especie: ${figura.species}</p>
-                                <span class="badge bg-info text-dark mt-auto align-self-center">Figura Coleccionable</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                // Creamos la columna
+                const colDiv = document.createElement('div');
+                colDiv.className = 'col-12 col-md-3';
+
+                // Creamos la tarjeta
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'card bg-secondary text-white h-100 border-0 shadow p-3 text-center';
+
+                // Creamos la imagen
+                const img = document.createElement('img');
+                img.src = figura.image; 
+                img.className = 'card-img-top rounded mx-auto';
+                img.style.height = '150px';
+                img.style.width = '150px';
+                img.style.objectFit = 'cover';
+                img.alt = figura.name;
+
+                // Creamos el cuerpo de la tarjeta
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body d-flex flex-column pb-0';
+
+                // Creamos el Título usando textContent para evitar XSS
+                const title = document.createElement('h6');
+                title.className = 'card-title fw-bold text-truncate mt-2';
+                title.textContent = figura.name; 
+
+                // Creamos el texto de especie usando textContent
+                const species = document.createElement('p');
+                species.className = 'small mb-2 text-warning';
+                species.textContent = `Especie: ${figura.species}`; 
+
+                // Creamos el Badge
+                const badge = document.createElement('span');
+                badge.className = 'badge bg-info text-dark mt-auto align-self-center';
+                badge.textContent = 'Figura Coleccionable';
+
+                cardBody.appendChild(title);
+                cardBody.appendChild(species);
+                cardBody.appendChild(badge);
+
+                cardDiv.appendChild(img);
+                cardDiv.appendChild(cardBody);
+
+                colDiv.appendChild(cardDiv);
+                contenedor.appendChild(colDiv);
             });
+
         } catch (error) {
-            console.error("Error al obtener los coleccionables:", error);
-            document.getElementById('loading-giveaways').innerHTML = "Error al cargar las figuras.";
+            console.error("Fallo al obtener coleccionables:", error);
+            // Mostrar error al usuario de forma segura
+            loading.style.display = 'block';
+            loading.textContent = "Lo sentimos, no pudimos cargar las figuras en este momento. Reintentando más tarde...";
         }
     }
 
-    // CONSUMO API 2: CheapShark (Ofertas y Reseñas)
+    // ==========================================
+    // CONSUMO API 2: CheapShark API (SEGURIDAD MEJORADA)
+    // ==========================================
     async function obtenerOfertas() {
+        // Asegúrate de que estos IDs coincidan con tu HTML
+        const contenedor = document.getElementById('ofertas-container'); 
+        const loading = document.getElementById('loading-ofertas');
+
         try {
-            const respuesta = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&pageSize=4');
+            // Pedimos 4 ofertas a la API
+            const respuesta = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15&pageSize=4');
+            
+            // VALIDACIÓN HTTP ESTRICTA
+            if (!respuesta.ok) {
+                throw new Error(`Error en la API de Ofertas: Estado ${respuesta.status}`);
+            }
+
             const datos = await respuesta.json();
             
-            const contenedor = document.getElementById('ofertas-container');
-            document.getElementById('loading-ofertas').style.display = 'none';
+            if (contenedor) contenedor.innerHTML = '';
+            if (loading) loading.style.display = 'none';
 
+            // CREACIÓN DE NODOS DOM SEGUROS
             datos.forEach(oferta => {
-                contenedor.innerHTML += `
-                    <div class="col-12 col-md-3">
-                        <div class="card bg-secondary text-white h-100 border-0 shadow">
-                            <img src="${oferta.thumb}" class="card-img-top" style="height: 120px; object-fit: cover; object-position: center;" alt="${oferta.title}">
-                            <div class="card-body d-flex flex-column justify-content-between p-3">
-                                <h6 class="card-title fw-bold">${oferta.title}</h6>
-                                
-                                <div class="mt-2">
-                                    <span class="badge bg-info text-dark mb-2">Metacritic: ${oferta.metacriticScore}/100</span>
-                                    
-                                    <div class="d-flex align-items-center bg-dark rounded p-2">
-                                        <span class="badge bg-success p-2 me-2">-${Math.round(oferta.savings)}%</span>
-                                        <div class="text-end lh-1 pe-1 w-100">
-                                            <small class="text-decoration-line-through text-secondary">USD ${oferta.normalPrice}</small><br>
-                                            <span class="text-info fw-bold">USD ${oferta.salePrice}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                // Columna
+                const colDiv = document.createElement('div');
+                colDiv.className = 'col-12 col-md-3 mb-4';
+
+                // Tarjeta principal
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'card bg-secondary text-white h-100 border-0 shadow text-start p-2';
+
+                // Imagen (Portada del juego)
+                const img = document.createElement('img');
+                img.src = oferta.thumb; // Asignación segura
+                img.className = 'card-img-top rounded';
+                img.style.height = '140px';
+                img.style.objectFit = 'cover';
+                img.alt = oferta.title;
+
+                // Cuerpo de la tarjeta
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body d-flex flex-column px-2 pb-2 pt-3';
+
+                // Título del juego
+                const title = document.createElement('h6');
+                title.className = 'card-title fw-bold text-truncate mb-2';
+                title.textContent = oferta.title; // Protección XSS
+
+                // Sección de Metacritic
+                const metaDiv = document.createElement('div');
+                metaDiv.className = 'mb-auto';
+                const metaBadge = document.createElement('span');
+                metaBadge.className = 'badge bg-info text-dark mb-2';
+                // Si no hay score, ponemos "N/A"
+                metaBadge.textContent = `Metacritic: ${oferta.metacriticScore || 'N/A'}/100`; 
+                metaDiv.appendChild(metaBadge);
+
+                // Caja oscura de precios y descuentos (El bloque inferior)
+                const priceBox = document.createElement('div');
+                priceBox.className = 'd-flex justify-content-between align-items-center bg-dark p-2 rounded mt-3';
+
+                // Etiqueta verde de descuento
+                const discountBadge = document.createElement('span');
+                discountBadge.className = 'badge bg-success';
+                discountBadge.textContent = `-${Math.round(oferta.savings)}%`;
+
+                // Contenedor de los dos precios (tachado y nuevo)
+                const priceContainer = document.createElement('div');
+                priceContainer.className = 'text-end';
+
+                // Precio antiguo (tachado)
+                const oldPrice = document.createElement('small');
+                oldPrice.className = 'text-secondary text-decoration-line-through d-block';
+                oldPrice.style.fontSize = '0.75rem';
+                oldPrice.textContent = `USD ${oferta.normalPrice}`;
+
+                // Precio nuevo
+                const newPrice = document.createElement('span');
+                newPrice.className = 'text-info fw-bold d-block';
+                newPrice.textContent = `USD ${oferta.salePrice}`;
+
+
+                priceContainer.appendChild(oldPrice);
+                priceContainer.appendChild(newPrice);
+
+                priceBox.appendChild(discountBadge);
+                priceBox.appendChild(priceContainer);
+
+                cardBody.appendChild(title);
+                cardBody.appendChild(metaDiv);
+                cardBody.appendChild(priceBox);
+
+                cardDiv.appendChild(img);
+                cardDiv.appendChild(cardBody);
+                colDiv.appendChild(cardDiv);
+
+                contenedor.appendChild(colDiv);
             });
+
         } catch (error) {
-            console.error("Error al obtener las ofertas:", error);
-            document.getElementById('loading-ofertas').innerHTML = "Error al cargar las ofertas.";
+            console.error("Fallo al obtener ofertas:", error);
+            if (loading) {
+                loading.style.display = 'block';
+                loading.textContent = "Error al cargar las ofertas destacadas en este momento.";
+            }
         }
     }
 
-    // Ejecutamos ambas funciones automáticamente al abrir la página
-    document.addEventListener("DOMContentLoaded", () => {
-        obtenerColeccionables();
-        obtenerOfertas();
-    });
+
 </script>
 {% endblock %}
