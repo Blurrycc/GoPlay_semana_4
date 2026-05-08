@@ -1,5 +1,34 @@
 from django.db import models
 from django.contrib.auth.models import User
+import os
+import uuid
+from django.core.exceptions import ValidationError
+
+
+
+# Función 1: Generar un nombre único e irrepetible para que las imágenes no choquen
+def renombrar_imagen(instance, filename):
+    # Extraemos la extensión del archivo original (ej. '.jpg' o '.png')
+    ext = filename.split('.')[-1]
+    # Generamos un nombre aleatorio único con UUID (ej. 'f47ac10b58cc4372a5670e02b2c3d479.jpg')
+    nombre_unico = f"{uuid.uuid4().hex}.{ext}"
+    # Guardamos en la carpeta 'productos/' dentro de tu directorio media
+    return os.path.join('productos/', nombre_unico)
+
+# Función 2: Validar el tamaño y el formato (Riesgos de almacenamiento)
+def validar_imagen(value):
+    # 1. Validar tamaño (Máximo 2 MB en este ejemplo)
+    limite_megabytes = 2
+    if value.size > limite_megabytes * 1024 * 1024:
+        raise ValidationError(f"La imagen es demasiado pesada. El tamaño máximo permitido es de {limite_megabytes}MB.")
+
+    # 2. Validar formato seguro
+    ext = os.path.splitext(value.name)[1].lower()
+    formatos_permitidos = ['.jpg', '.jpeg', '.png', '.webp']
+    if ext not in formatos_permitidos:
+        raise ValidationError(f"Formato no soportado. Por favor sube una imagen en formato: {', '.join(formatos_permitidos).upper()}")
+    
+
 
 # 1. Tabla para los Roles (Administrador, Cliente, etc.)
 class Rol(models.Model):
@@ -37,9 +66,8 @@ class Producto(models.Model):
     # Relacionamos cada juego con una categoría
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name='Categoría')
     # Guardaremos las imágenes en una carpeta llamada 'productos'
-    imagen = models.ImageField(upload_to='productos/', null=True, blank=True, verbose_name='Imagen del Juego')
+    imagen = models.ImageField(upload_to=renombrar_imagen, null=True, blank=True, verbose_name='Imagen del Juego', validators=[validar_imagen])
 
     def __str__(self):
         return self.nombre
     
-

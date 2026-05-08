@@ -12,7 +12,7 @@
     </head>
     <body>
         
-        <!-- TU HEADER ORIGINAL CON MEGA-MENÚS -->
+        <!-- HEADER CON MEGA-MENÚS -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 shadow-sm">
                 <div class="container-fluid">
@@ -131,6 +131,17 @@
             </nav>
         </header>
 
+        <div class="container mt-3 position-relative" style="z-index: 1050;">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
         <!-- ============================================== -->
         <!-- AQUÍ VA EL CONTENIDO DINÁMICO DE CADA PÁGINA -->
         <!-- ============================================== -->
@@ -141,7 +152,7 @@
         <!-- ============================================== -->
 
 
-        <!-- TU PANEL LATERAL (OFFCANVAS) ORIGINAL -->
+        <!-- PANEL LATERAL (OFFCANVAS) -->
         <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasLogin">
             <div class="offcanvas-header border-bottom border-secondary">
                 <h5 class="offcanvas-title text-uppercase fw-bold" id="offcanvasLoginLabel">
@@ -182,7 +193,7 @@
 
         <!-- SCRIPTS GLOBALES -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>        
-        <!-- Agregamos tus validaciones JS por si las necesitas globalmente -->
+        <!-- Agregamos las validaciones JS -->
         <script src="{% static 'tienda/js/validaciones.js' %}"></script>
     </body>
 </html>
