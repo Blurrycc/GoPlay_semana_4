@@ -37,12 +37,14 @@ urlpatterns = [
     # Ruta para generar el Token de seguridad
     path('api/token/', obtain_auth_token, name='api_token'),
 
-
+    # Rutas para las novedades (Uso de APIs externas)
     path('novedades/', views.novedades, name='novedades'),
 
     # Ruta dinámica para el detalle del producto:
     path('producto/<int:id>/', views.detalle_producto, name='detalle_producto'),
 
-    
+    # Rutas para el mantenedor de usuarios (solo admin)
+    path('mantenedor-usuarios/', views.mantenedor_usuarios, name='mantenedor_usuarios'),
+    path('editar-usuario/<int:id>/', views.editar_usuario, name='editar_usuario'),
 ]
 

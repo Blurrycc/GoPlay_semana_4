@@ -19,6 +19,26 @@
                     <p class="text-muted mb-3">Jugador Activo</p>
                     
                     <a href="#" class="btn btn-outline-light w-100 mb-2">Ver mis compras</a>
+
+                    {% if user.perfilusuario.rol.nombre|lower == 'administrador' or user.perfilusuario.rol.nombre|lower == 'admin' %}
+                        
+                        <hr class="border-secondary my-3">
+                        <p class="text-warning fw-bold mb-2 small text-uppercase">Herramientas de Admin</p>
+                        
+                        <a href="{% url 'mantenedor_productos' %}" class="btn btn-warning w-100 fw-bold mb-2 text-dark">
+                            Mantenedor
+                        </a>
+                        
+                        <a href="{% url 'mantenedor_usuarios' %}" class="btn btn-info w-100 fw-bold mb-2 text-dark">
+                            Usuarios
+                        </a>
+                        
+                        <a href="/admin/" class="btn btn-outline-warning w-100 fw-bold mb-2" target="_blank">
+                            Panel Admin
+                        </a>
+                        
+                    {% endif %}
+                    
                 </div>
             </div>
         </div>

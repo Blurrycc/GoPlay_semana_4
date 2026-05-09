@@ -8,7 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.core.paginator import Paginator
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from .forms import PerfilUsuarioForm
+from .forms import PerfilUsuarioForm, PerfilUsuarioAdminForm
 from .decorators import requiere_rol_admin
 
 # Vista de la página principal
@@ -355,3 +355,33 @@ def detalle_producto(request, id):
     }
     
     return render(request, 'tienda/detalle_producto.html', context)
+
+    
+@requiere_rol_admin   
+def mantenedor_usuarios(request):
+    # Traemos a todos los usuarios y sus perfiles de un solo golpe (optimización)
+    usuarios = User.objects.all().select_related('perfilusuario__rol')
+    
+    context = {
+        'usuarios': usuarios
+    }
+    return render(request, 'tienda/mantenedor_usuarios.html', context)
+
+@requiere_rol_admin
+def editar_usuario(request, id):
+    # Buscamos al usuario por su ID
+    usuario_obj = get_object_or_404(User, id=id)
+    # Obtenemos su perfil (o lo creamos si no existiera por algún error previo)
+    perfil_obj, created = PerfilUsuario.objects.get_or_create(user=usuario_obj)
+    
+    if request.method == 'POST':
+        # Usamos nuestro nuevo formulario de Admin
+        form = PerfilUsuarioAdminForm(request.POST, instance=perfil_obj)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'El perfil de {usuario_obj.username} ha sido actualizado.')
+            return redirect('mantenedor_usuarios')
+    else:
+        form = PerfilUsuarioAdminForm(instance=perfil_obj)
+    
+    return render(request, 'tienda/editar_usuario.html', {'form': form, 'usuario': usuario_obj})

@@ -1,0 +1,47 @@
+{% extends 'tienda/base.html' %}
+{% block titulo %}Gestión de Usuarios - Go Play!{% endblock %}
+
+{% block contenido %}
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-uppercase fw-bold text-white">Gestión de <span class="text-danger">Usuarios</span></h2>
+    </div>
+
+    <div class="table-responsive bg-dark p-4 rounded shadow">
+        <table class="table table-dark table-hover align-middle">
+            <thead class="text-secondary border-secondary">
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre Real</th>
+                    <th>Email</th>
+                    <th>Rol Actual</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in usuarios %}
+                <tr>
+                    <td class="fw-bold text-info">{{ u.username }}</td>
+                    <td>{{ u.first_name }} {{ u.last_name }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>
+                        {% if u.perfilusuario.rol %}
+                            <span class="badge {% if u.perfilusuario.rol.nombre|lower == 'administrador' %}bg-danger{% else %}bg-primary{% endif %}">
+                                {{ u.perfilusuario.rol.nombre }}
+                            </span>
+                        {% else %}
+                            <span class="badge bg-secondary">Sin Rol</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'editar_usuario' u.id %}" class="btn btn-sm btn-outline-warning">
+                            <i class="fas fa-user-edit"></i> Editar Rol
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -110,11 +110,6 @@
                             {% if user.is_authenticated %}
                                 <span class="text-light me-3 align-self-center">Hola, <b>{{ user.username }}</b></span>
 
-                                {% if user.is_staff %}
-                                <a href="{% url 'mantenedor' %}" class="btn btn-warning rounded-pill px-4 text-uppercase fw-bold me-2">Mantenedor</a>
-                                <a href="/admin/" class="btn btn-warning rounded-pill px-4 text-uppercase fw-bold me-2">Panel Admin</a>
-                                {% endif %}
-
                                 <a href="{% url 'perfil' %}" class="btn btn-outline-light rounded-pill px-4 text-uppercase fw-bold me-2">Mi Perfil</a>
                                 <a href="{% url 'logout' %}" class="btn btn-danger rounded-pill px-4 text-uppercase fw-bold">Cerrar Sesión</a>
 
