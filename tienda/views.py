@@ -11,6 +11,10 @@ from django.core.exceptions import ValidationError
 from .forms import PerfilUsuarioForm, PerfilUsuarioAdminForm
 from .decorators import requiere_rol_admin
 
+import requests
+from django.http import JsonResponse
+from django.views.decorators.cache import cache_page
+
 # Vista de la página principal
 def index(request):
     juegos_mesa = Producto.objects.filter(categoria__nombre__icontains='mesa').order_by('-id')[:6]
@@ -385,3 +389,33 @@ def editar_usuario(request, id):
         form = PerfilUsuarioAdminForm(instance=perfil_obj)
     
     return render(request, 'tienda/editar_usuario.html', {'form': form, 'usuario': usuario_obj})
+
+
+# ==========================================
+# PROXY PARA APIS EXTERNAS CON CACHÉ
+# ==========================================
+
+# Guardamos la respuesta en memoria por 15 minutos (60 segundos * 15)
+@cache_page(60 * 15) 
+def api_proxy_ofertas(request):
+    try:
+        url = 'https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15&pageSize=4'
+        # El servidor backend hace la petición (Timeout de 5 seg para no colgar la página)
+        respuesta = requests.get(url, timeout=5)
+        respuesta.raise_for_status() # Verifica que no haya error 404 o 500
+        datos = respuesta.json()
+        return JsonResponse(datos, safe=False)
+    except Exception as e:
+        # Si la API externa falla, devolvemos un error controlado
+        return JsonResponse({'error': 'Servicio de ofertas temporalmente no disponible'}, status=503)
+
+@cache_page(60 * 15)
+def api_proxy_coleccionables(request):
+    try:
+        url = 'https://rickandmortyapi.com/api/character/1,2,3,4'
+        respuesta = requests.get(url, timeout=5)
+        respuesta.raise_for_status()
+        datos = respuesta.json()
+        return JsonResponse(datos, safe=False)
+    except Exception as e:
+        return JsonResponse({'error': 'Servicio de coleccionables temporalmente no disponible'}, status=503)

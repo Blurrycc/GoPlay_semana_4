@@ -39,7 +39,7 @@
         const loading = document.getElementById('loading-giveaways');
 
         try {
-            const respuesta = await fetch('https://rickandmortyapi.com/api/character/1,2,3,4');
+            const respuesta = await fetch('/api/coleccionables/');
             
             // VALIDACIÓN HTTP ESTRICTA
             // Verificamos si el servidor respondió con un error (ej. 404 o 500)
@@ -119,7 +119,7 @@
 
         try {
             // Pedimos 4 ofertas a la API
-            const respuesta = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15&pageSize=4');
+            const respuesta = await fetch('/api/ofertas/');
             
             // VALIDACIÓN HTTP ESTRICTA
             if (!respuesta.ok) {

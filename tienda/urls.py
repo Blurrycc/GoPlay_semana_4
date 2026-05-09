@@ -46,5 +46,10 @@ urlpatterns = [
     # Rutas para el mantenedor de usuarios (solo admin)
     path('mantenedor-usuarios/', views.mantenedor_usuarios, name='mantenedor_usuarios'),
     path('editar-usuario/<int:id>/', views.editar_usuario, name='editar_usuario'),
+
+
+    # Rutas para las APIs externas (proxy)
+    path('api/ofertas/', views.api_proxy_ofertas, name='api_ofertas'),
+    path('api/coleccionables/', views.api_proxy_coleccionables, name='api_coleccionables'),
 ]
 
