@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from .forms import PerfilUsuarioForm
+from .decorators import requiere_rol_admin
 
 # Vista de la página principal
 def index(request):
@@ -154,18 +155,14 @@ def perfil(request):
 def carrito(request):
     return render(request, 'tienda/carrito.html')
 
-@login_required(login_url='login')
+@requiere_rol_admin
 def mantenedor_productos(request):
-    # 1. Seguridad: Si el usuario NO es administrador (staff), lo echamos
-    if not request.user.is_staff:
-        messages.error(request, 'Acceso denegado. Esta sección es solo para Administradores.')
-        return redirect('index')
 
-    # 2. Traemos los datos de Oracle
+    # Traemos los datos de Oracle
     categorias = Categoria.objects.all()
     productos = Producto.objects.all()
 
-    # 3. Lógica para CREAR un producto nuevo desde el Frontend
+    #  Lógica para CREAR un producto nuevo desde el Frontend
     if request.method == 'POST':
         v_nombre = request.POST.get('nombre_prod')
         v_desc = request.POST.get('desc_prod', 'Sin descripción') # Por si no tienes campo de descripción
@@ -191,7 +188,7 @@ def mantenedor_productos(request):
         except Exception as e:
             messages.error(request, f'Error al guardar: {str(e)}')
 
-    # 4. Enviamos los datos al HTML
+    #  Enviamos los datos al HTML
     contexto = {
         'categorias': categorias,
         'productos': productos
@@ -283,22 +280,16 @@ def cerrar_sesion(request):
     return redirect('index')
 
 # --- FUNCIÓN PARA ELIMINAR ---
-@login_required(login_url='login')
+@requiere_rol_admin
 def eliminar_producto(request, id):
-    if not request.user.is_staff:
-        return redirect('index')
-        
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
     messages.success(request, '¡Producto eliminado correctamente!')
     return redirect('mantenedor')
 
 # --- FUNCIÓN PARA EDITAR ---
-@login_required(login_url='login')
+@requiere_rol_admin
 def editar_producto(request, id):
-    if not request.user.is_staff:
-        return redirect('index')
-        
     producto = get_object_or_404(Producto, id=id)
     categorias = Categoria.objects.all()
 
