@@ -52,42 +52,14 @@
                     Explorar Categorías
                 </h5>
                     
-                <div class="d-flex flex-column gap-3">
-                    <!-- Categoría 1 -->
-                    <a href="{% url 'categorias_accion' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
-                        Acción
-                    </a>
-                        
-                    <!-- Categoría 2 -->
-                    <a href="{% url 'categorias_aventura' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
-                        Aventura
-                    </a>
-                        
-                    <!-- Categoría 3 -->
-                    <a href="{% url 'categorias_disparos' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
-                        Disparos
-                    </a>
-                        
-                    <!-- Categoría 4 -->
-                    <a href="{% url 'categorias_estrategia' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
-                        Estrategia
-                    </a>
-
-                    <!-- Categoría 5 -->
-                    <a href="{% url 'categorias_supervivencia' %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
-                        Supervivencia
-                    </a>
-
-                    <!-- Categoría 6 -->
-                    <a href="#" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
-                        Juegos de Mesa
-                    </a>
-
-                    <!-- Categoría 7 -->
-                    <a href="#" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
-                        Coleccionables
-                    </a>
+                <div class="d-flex flex-column gap-3">                    
+                    {% for cat in categorias %}        
+                        <a href="{% url 'productos_por_categoria' cat.id %}" class="btn btn-outline-warning text-start py-3 px-4 fw-bold text-uppercase" style="border-radius: 10px;">
+                            {{ cat.nombre }}
+                        </a> 
+                    {% endfor %}
                 </div>
+
             </div>
         </div>
 

@@ -20,11 +20,13 @@ def index(request):
     juegos_mesa = Producto.objects.filter(categoria__nombre__icontains='mesa').order_by('-id')[:6]
     figuras = Producto.objects.filter(categoria__nombre__icontains='figura').order_by('-id')[:6]
     videojuegos = Producto.objects.filter(categoria__nombre__icontains='Videojuegos').order_by('-id')[:6]
+    categorias = Categoria.objects.all()
     
     context = {
         'videojuegos': videojuegos,
         'juegos_mesa': juegos_mesa,
-        'figuras': figuras
+        'figuras': figuras,
+        'categorias': categorias
     }
     return render(request, 'tienda/index.html', context)
 
@@ -275,6 +277,25 @@ def disparos(request):
         'productos': page_obj
     }
     return render(request, 'tienda/categorias/disparos.html', contexto)
+
+
+def productos_por_categoria(request, id_cat):
+    # 1. Buscamos la categoría para saber cuál es el título
+    categoria = get_object_or_404(Categoria, id=id_cat)
+    
+    # 2. Filtramos los productos que pertenecen a esa categoría
+    # Usamos .order_by('-id') para que los más nuevos salgan arriba
+    productos = Producto.objects.filter(categoria=categoria).order_by('-id')
+    
+    # 3. También necesitamos todas las categorías para el panel lateral
+    categorias_menu = Categoria.objects.all()
+
+    context = {
+        'categoria': categoria,
+        'productos': productos,
+        'categorias_menu': categorias_menu
+    }
+    return render(request, 'tienda/productos_por_categoria.html', context)
 
 
 # --- Función para Cerrar Sesión ---

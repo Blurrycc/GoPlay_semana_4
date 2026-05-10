@@ -1,0 +1,50 @@
+{% extends 'tienda/base.html' %}
+{% block contenido %}
+<div class="container my-5">
+    <div class="row">
+        
+        <div class="col-12 col-md-3 mb-4">
+            <div class="p-4 h-100 text-bg-dark rounded shadow-lg border-start border-warning border-5">
+                <h5 class="text-warning fw-bold text-uppercase mb-4">
+                    Explorar Categorías
+                </h5>
+                <div class="d-flex flex-column gap-3">
+                    {% for cat in categorias_menu %}
+                        <a href="{% url 'productos_por_categoria' cat.id %}" 
+                           class="btn {% if cat.id == categoria.id %}btn-warning text-dark{% else %}btn-outline-warning{% endif %} text-start py-3 px-4 fw-bold text-uppercase" 
+                           style="border-radius: 10px;">
+                            {{ cat.nombre }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-9">
+            <h2 class="text-uppercase fw-bold text-white mb-4">
+                Explorar: <span class="text-info">{{ categoria.nombre }}</span>
+            </h2>
+            
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for prod in productos %}
+                <div class="col">
+                    <a href="{% url 'detalle_producto' prod.id %}" class="text-decoration-none">
+                        <div class="card h-100 bg-secondary border-0 shadow card-goplay">
+                            <img src="{{ prod.imagen.url }}" class="card-img-top" alt="{{ prod.nombre }}" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h6 class="card-title text-white fw-bold">{{ prod.nombre }}</h6>
+                                <p class="card-text text-info fw-bold">CLP ${{ prod.precio }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center my-5">
+                    <p class="text-muted">No hay productos en esta categoría por el momento.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

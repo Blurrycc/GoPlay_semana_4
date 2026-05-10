@@ -51,5 +51,8 @@ urlpatterns = [
     # Rutas para las APIs externas (proxy)
     path('api/ofertas/', views.api_proxy_ofertas, name='api_ofertas'),
     path('api/coleccionables/', views.api_proxy_coleccionables, name='api_coleccionables'),
+
+    # Ruta para mostrar productos por categoría
+    path('categoria/<int:id_cat>/', views.productos_por_categoria, name='productos_por_categoria'),
 ]
 
