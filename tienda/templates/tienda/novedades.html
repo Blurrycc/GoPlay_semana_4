@@ -218,6 +218,12 @@
         }
     }
 
+    // Llamamos a las funciones para cargar los datos al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        obtenerColeccionables();
+        obtenerOfertas();
+    });
+
 
 </script>
 {% endblock %}
